@@ -12,7 +12,7 @@ def bubble_sort(numbers: List[int]) -> List[int]:
     return numbers
 
 
-def insertion_sort(numbers: List[int]) -> List[int]:
+def selection_sort(numbers: List[int]) -> List[int]:
     len_numbers = len(numbers)
 
     for i in range(len_numbers):

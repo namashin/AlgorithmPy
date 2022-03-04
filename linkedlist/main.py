@@ -36,6 +36,14 @@ class LinkedList(object):
 
         last_node = self.head
         while last_node.next:
+            """
+            
+            last_node.nextがNoneになったら抜けて、
+            new_nodeをそこに入れる。
+            
+            nextにNodeを付けていく
+
+            """
             last_node = last_node.next
         last_node.next = new_node
 
@@ -117,7 +125,6 @@ if __name__ == '__main__':
     linked_list.append('No2')
     linked_list.append('No3')
     linked_list.insert('No4')
-
     linked_list.remove('No3')
 
     linked_list.reverse_iterative()
