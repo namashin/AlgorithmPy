@@ -52,6 +52,28 @@ class HashTable(object):
 
             print()
 
+   
+
+def find_pair(pairs: List[Tuple[int, int]]) -> Iterator[Tuple[int, int]]:
+    cache = dict()
+
+    for pair in pairs:
+        first, second = pair[0], pair[1]
+        value = cache.get(second)
+        if not value:
+            """valueが取れなかったら、Noneがvalueに入る"""
+            cache[first] = second
+            
+        elif value == first:
+            yield pair
+
+
+//input = [(1, 2), (3, 5), (4, 7), (5, 3), (7, 4)]
+//for pair in find_pair(input):
+//print(pair)
+            
+            
+            
 
 if __name__ == '__main__':
     hash_table = HashTable()
