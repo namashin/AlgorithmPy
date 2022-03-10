@@ -53,6 +53,29 @@ class HashTable(object):
             print()
 
 
+"""
+キャッシュデコレーターの生成
+"""
+
+
+def memoize(f):
+    cache = dict()
+
+    def _wrapper(n):
+        if n not in cache:
+            cache[n] = f(n)
+        return cache[n]
+    return _wrapper
+
+
+@memoize
+def cpu_bound(num: int) -> int:
+    x = 0
+    for i in range(100000):
+        x += num * i
+    return x
+
+
 if __name__ == '__main__':
     hash_table = HashTable()
     hash_table.add('pc', 'mac')
