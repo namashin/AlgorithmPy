@@ -119,8 +119,8 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
     for x_key, x_value in count_x.items():
         y_value = count_y.get(x_key)
         if y_value:
+            """y_valueが存在する時"""
             if x_value < y_value:
-                """"""
                 x[:] = [i for i in x if i != x_key]
             elif x_value > y_value:
                 y[:] = [i for i in y if i != x_key]
@@ -128,12 +128,56 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
                 continue
 
 
-if __name__ == '__main__':
-    x = [1, 2, 3, 4, 4, 5, 5, 6, 6, 10]
-    y = [2, 4, 6, 7, 8, 10, 10, 10]
+"""
+[1] => [2] => 2
+[2, 3] => [2, 4] => 24
+[9, 9] => [1, 0, 0] => 100
+[7, 8, 9] => [7, 9, 0] => 790
+[0, 0, 0, 9, 9, 9, 9] => [1, 0, 0, 0, 0] => 10000
+"""
 
-    print(x)
-    print(y)
-    min_count_remove_no1(x, y)
-    print(x)
-    print(y)
+# l = [1, 2, 3]
+# l = int(''.join([str(i) for i in l]))
+# >>> 123
+
+
+def list_to_int_plus1(numbers: List[int]) -> int:
+    # リストの一番後ろのインデックス取得 (i)
+    i = len(numbers) - 1
+    numbers[i] += 1
+
+    while 0 < i:
+        if numbers[i] != 10:
+            remove_zero(numbers)
+            break
+
+        # numbers[i] が 10の時
+        numbers[i] = 0
+        numbers[i - 1] += 1
+
+        i -= 1
+    else:
+        """上のwhileでbreakしなかったら、elseに入る"""
+        if numbers[0] == 10:
+            numbers[0] = 1
+            numbers.append(0)
+
+    return list_to_int(numbers)
+
+
+def remove_zero(numbers: List[int]) -> None:
+    if numbers and numbers[0] == 0:
+        numbers.pop(0)
+        remove_zero(numbers)
+
+
+def list_to_int(numbers: List[int]) -> int:
+    sum_numbers_of_list = 0
+    for i, num in enumerate(reversed(numbers)):
+        sum_numbers_of_list += num * (10 ** i)
+    return sum_numbers_of_list
+
+
+if __name__ == '__main__':
+    x = [3, 6, 9, 5, 9]
+    print(list_to_int_plus1(x))
