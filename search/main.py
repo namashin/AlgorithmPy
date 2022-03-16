@@ -1,3 +1,4 @@
+import unittest
 from typing import List, NewType
 
 Index = NewType("index", int)
@@ -42,14 +43,35 @@ def binary_search_recursive(numbers: List[int], target: int) -> Index:
     return _binary_search_recursive(numbers, target, 0, len(numbers) - 1)
 
 
+class TestSearch(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.numbers = [1, 3, 5, 6, 7, 9, 10, 22]
+        self.target = 9
+        self.wrong_target = 100
+
+    def tearDown(self) -> None:
+        pass
+
+    def test_binary_search(self):
+        ret = binary_search(self.numbers, self.target)
+        ret1 = binary_search(self.numbers, self.wrong_target)
+
+        target_index = 5
+
+        self.assertEqual(target_index, ret)
+        self.assertEqual(-1, ret1)
+
+    def test_binary_search_recursive(self):
+        ret = binary_search_recursive(self.numbers, self.target)
+        ret1 = binary_search_recursive(self.numbers, self.wrong_target)
+
+        target_index = 5
+        self.assertEqual(target_index, ret)
+        self.assertEqual(-1, ret1)
+
+
 if __name__ == '__main__':
     # 既にソートされ終わった事を想定
     # その後、目的の数字のインデックスを取得
-
-    nums = [1, 3, 5, 6, 7, 9, 10, 22]
-
-    index1 = binary_search(nums, 10)
-    index2 = binary_search_recursive(nums, 10)
-
-    print(index1)
-    print(index2)
+    unittest.main()

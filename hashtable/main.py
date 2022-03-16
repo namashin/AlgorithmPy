@@ -1,8 +1,9 @@
 import hashlib
+import unittest
 
-from typing import NewType
+from typing import NewType, Tuple, List, Iterator
 
-hashTableKey = NewType('hash table key', int)
+# hashTableKey = NewType('hash table key', int)
 
 
 class HashTable(object):
@@ -11,7 +12,7 @@ class HashTable(object):
         self.size = size
         self.table = [[] for _ in range(self.size)]
 
-    def hash(self, key: str) -> hashTableKey:
+    def hash(self, key: str) -> int:
         return int(hashlib.md5(key.encode()).hexdigest(), base=16) % self.size
 
     def add(self, key: str, value: str):
@@ -52,8 +53,45 @@ class HashTable(object):
 
             print()
 
-   
 
+class TestHashTable(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.hash_table = HashTable()
+
+    def tearDown(self) -> None:
+        pass
+
+    def test_hash(self):
+        key1 = "my_key"
+        key2 = "my_key"
+
+        hash_num1 = self.hash_table.hash(key1)
+        hash_num2 = self.hash_table.hash(key2)
+
+        self.assertEqual(hash_num1, hash_num2)
+
+    def test_add(self):
+        self.hash_table.add("key1", "value1")
+        self.hash_table.add("key2", "value2")
+        self.hash_table.add("key1", "value3")
+
+        hash_num1 = self.hash_table.hash("key1")
+
+        self.assertIsInstance(self.hash_table.table[hash_num1][0], list)
+        self.assertEqual(self.hash_table.table[hash_num1][0][1], "value3")
+
+    def test_get(self):
+        self.hash_table.add("key1", "value1")
+        self.hash_table.add("key2", "value2")
+
+        value = self.hash_table.get("key1")
+
+        self.assertEqual(value, "value1")
+
+
+# [(1, 2), (3, 5), (4, 7), (5, 3), (7, 4)]
+# の中から、対になっているものを探す
 def find_pair(pairs: List[Tuple[int, int]]) -> Iterator[Tuple[int, int]]:
     cache = dict()
 
@@ -68,11 +106,9 @@ def find_pair(pairs: List[Tuple[int, int]]) -> Iterator[Tuple[int, int]]:
             yield pair
 
 
-//input = [(1, 2), (3, 5), (4, 7), (5, 3), (7, 4)]
-//for pair in find_pair(input):
-//print(pair)
-            
-            
+# input = [(1, 2), (3, 5), (4, 7), (5, 3), (7, 4)]
+# for pair in find_pair(input):
+# print(pair)
             
 
 """
@@ -99,19 +135,22 @@ def cpu_bound(num: int) -> int:
 
 
 if __name__ == '__main__':
-    hash_table = HashTable()
-    hash_table.add('pc', 'mac')
-    hash_table.add('phone', 'iPhone')
-    hash_table.add('phone', 'sumsung')
-    hash_table.add('car', 'toyota')
-    hash_table.add('sns', 'youtube')
+    print(cpu_bound(4))
+    print(cpu_bound(4))
 
-    hash_table['os'] = 'windows'
-
-    hash_table.print()
-    print("############")
-    hash_table.delete('pc')
-    hash_table.delete('car')
-    hash_table.print()
-
-    print(hash_table['os'])
+    # hash_table = HashTable()
+    # hash_table.add('pc', 'mac')
+    # hash_table.add('phone', 'iPhone')
+    # hash_table.add('phone', 'sumsung')
+    # hash_table.add('car', 'toyota')
+    # hash_table.add('sns', 'youtube')
+    #
+    # hash_table['os'] = 'windows'
+    #
+    # hash_table.print()
+    # print("############")
+    # hash_table.delete('pc')
+    # hash_table.delete('car')
+    # hash_table.print()
+    #
+    # print(hash_table['os'])

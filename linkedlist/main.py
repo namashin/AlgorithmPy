@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import unittest
 from typing import Any
 
 
@@ -119,17 +119,73 @@ class LinkedList(object):
         self.head = _reverse_recursive(self.head, None)
 
 
+class TestLinkedList(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.linked_list = LinkedList()
+
+    def tearDown(self) -> None:
+        pass
+
+    def test_append(self):
+        self.linked_list.append("Test1")
+        self.linked_list.append("Test2")
+        self.linked_list.append("Test3")
+
+        self.assertEqual("Test1", self.linked_list.head.data)
+        self.assertEqual("Test2", self.linked_list.head.next.data)
+        self.assertEqual("Test3", self.linked_list.head.next.next.data)
+
+    def test_insert(self):
+        self.linked_list.append("Test1")
+        self.linked_list.append("Test2")
+        self.linked_list.append("Test3")
+
+        self.linked_list.insert("Test4")
+        self.assertEqual("Test4", self.linked_list.head.data)
+
+    def test_remove(self):
+        self.linked_list.append("Test1")
+        self.linked_list.append("Test2")
+
+        self.linked_list.remove("Test1")
+        self.assertEqual("Test2", self.linked_list.head.data)
+
+    def test_reverse_iterative(self):
+        self.linked_list.append("Test1")
+        self.linked_list.append("Test2")
+        self.linked_list.append("Test3")
+
+        self.linked_list.reverse_iterative()
+
+        self.assertEqual("Test3", self.linked_list.head.data)
+        self.assertEqual("Test2", self.linked_list.head.next.data)
+        self.assertEqual("Test1", self.linked_list.head.next.next.data)
+
+    def test_reverse_recursive(self):
+        self.linked_list.append("Test1")
+        self.linked_list.append("Test2")
+        self.linked_list.append("Test3")
+
+        self.linked_list.reverse_recursive()
+
+        self.assertEqual("Test3", self.linked_list.head.data)
+        self.assertEqual("Test2", self.linked_list.head.next.data)
+        self.assertEqual("Test1", self.linked_list.head.next.next.data)
+
+
 if __name__ == '__main__':
-    linked_list = LinkedList()
-    linked_list.append('No1')
-    linked_list.append('No2')
-    linked_list.append('No3')
-    linked_list.insert('No4')
-    linked_list.remove('No3')
-
-    linked_list.reverse_iterative()
-    linked_list.print()
-    linked_list.reverse_recursive()
-    linked_list.print()
-
-    print(linked_list.get_next_node(linked_list.head))
+    unittest.main()
+    # linked_list = LinkedList()
+    # linked_list.append('No1')
+    # linked_list.append('No2')
+    # linked_list.append('No3')
+    # linked_list.insert('No4')
+    # linked_list.remove('No3')
+    #
+    # linked_list.reverse_iterative()
+    # linked_list.print()
+    # linked_list.reverse_recursive()
+    # linked_list.print()
+    #
+    # print(linked_list.get_next_node(linked_list.head))
