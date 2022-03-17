@@ -135,8 +135,7 @@ def cpu_bound(num: int) -> int:
 
 
 if __name__ == '__main__':
-    print(cpu_bound(4))
-    print(cpu_bound(4))
+    unittest.main()
 
     # hash_table = HashTable()
     # hash_table.add('pc', 'mac')
