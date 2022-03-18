@@ -137,7 +137,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertEqual(min_node.value, 1)
 
-    def test_inorder(self):
+    def test_inorder2(self):
         nodes = self.bst.inorder2(self.bst.root)
         self.assertEqual(nodes.__next__(), 1)
         self.assertEqual(nodes.__next__(), 3)
