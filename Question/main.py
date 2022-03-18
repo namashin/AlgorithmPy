@@ -41,7 +41,7 @@ answer:
 def count_words_no1(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
 
-    cache = []
+    cache = [] # list
     for char in chars:
         if not char.isspace():
             cache.append((char, chars.count(char)))
@@ -54,7 +54,7 @@ def count_words_no1(chars: str) -> Tuple[str, int]:
 
 def count_words_no2(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
-    cache = dict()
+    cache = {} # dict
 
     for char in chars:
         if not char.isspace():
