@@ -95,6 +95,7 @@ def validate_json(chars: str) -> bool:
             stack.append(lookup[char])
 
         if char in lookup.values():
+            # pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
             if not stack:
                 return False
 
