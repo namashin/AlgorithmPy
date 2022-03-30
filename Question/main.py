@@ -15,7 +15,7 @@ answer: (3, 5), (7, 4)
 
 
 def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
-    cache = dict()
+    cache = {} 
 
     for pair in pairs:
         first, second = pair[0], pair[1]
@@ -27,6 +27,11 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
         if value == first:
             yield pair
 
+            
+# value = cache.get(second)　について           
+# getメソッドは指定されたキーがdictにあれば値を返し、なければデフォルトでNone、指定されていれば第2引数の値を返します。            
+            
+            
 
 """
 
@@ -116,7 +121,7 @@ def min_count_remove_no1(x: List[int], y: List[int]) -> None:
 
 
 def min_count_remove_no2(x: List[int], y: List[int]) -> None:
-    """Counter()は辞書のように使える"""
+    """Counter()はdictのように使える"""
     count_x = Counter(x)
     count_y = Counter(y)
 
