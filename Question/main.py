@@ -161,7 +161,7 @@ def list_to_int_plus1(numbers: List[int]) -> int:
 
         i -= 1
     else:
-        """上のwhileでbreakしなかったら、elseに入る"""
+        """リストの先頭が10だった場合の処理"""
         if numbers[0] == 10:
             numbers[0] = 1
             numbers.append(0)
