@@ -74,7 +74,7 @@ def count_words_no3(chars: str) -> Tuple[str, int]:
             d[char] += 1
 
     # これでもいい
-    # counter = Counter(input)
+    # counter = Counter(char)
     # return counter.most_common(1)
 
     max_key = max(d, key=d.get)
@@ -110,9 +110,9 @@ def min_count_remove_no1(x: List[int], y: List[int]) -> None:
                 x[:] = [i for i in x if i != x_key]
             elif x_value > y_value:
                 y[:] = [i for i in y if i != x_key]
-            elif y_value == x_value:
-                """数一緒ならそのまま"""
-                continue
+            # elif y_value == x_value:
+            #     """数一緒ならそのまま"""
+            #     continue
 
 
 def min_count_remove_no2(x: List[int], y: List[int]) -> None:
@@ -126,6 +126,12 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
             """y_valueが存在する時"""
             if x_value < y_value:
                 x[:] = [i for i in x if i != x_key]
+
+                # x = []
+                # for i in x:
+                #     if i != x_key:
+                #         x.append(i)
+
             elif x_value > y_value:
                 y[:] = [i for i in y if i != x_key]
             elif x_value == y_value:
@@ -192,4 +198,3 @@ def list_to_int(numbers: List[int]) -> int:
 if __name__ == '__main__':
     input = 'hello world, to all people in this world. loy'
     print(count_words_no1(input))
-

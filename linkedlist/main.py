@@ -107,7 +107,7 @@ class LinkedList(object):
 
     def reverse_recursive(self):
         def _reverse_recursive(current_node: Node, previous_node: Node):
-            if not current_node:
+            if not current_node:  # if current_node is None
                 return previous_node
 
             next_node = current_node.next
