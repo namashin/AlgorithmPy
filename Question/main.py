@@ -15,7 +15,7 @@ answer: (3, 5), (7, 4)
 
 
 def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
-    cache = dict()
+    cache = {} 
 
     for pair in pairs:
         first, second = pair[0], pair[1]
@@ -27,6 +27,11 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
         if value == first:
             yield pair
 
+            
+# value = cache.get(second)　について           
+# getメソッドは指定されたキーがdictにあれば値を返し、なければデフォルトでNone、指定されていれば第2引数の値を返します。            
+            
+            
 
 """
 
@@ -41,7 +46,7 @@ answer:
 def count_words_no1(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
 
-    cache = []
+    cache = [] # list
     for char in chars:
         if not char.isspace():
             cache.append((char, chars.count(char)))
@@ -54,7 +59,7 @@ def count_words_no1(chars: str) -> Tuple[str, int]:
 
 def count_words_no2(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
-    cache = dict()
+    cache = {} # dict
 
     for char in chars:
         if not char.isspace():
@@ -116,7 +121,7 @@ def min_count_remove_no1(x: List[int], y: List[int]) -> None:
 
 
 def min_count_remove_no2(x: List[int], y: List[int]) -> None:
-    """Counter()は辞書のように使える"""
+    """Counter()はdictのように使える"""
     count_x = Counter(x)
     count_y = Counter(y)
 
@@ -167,7 +172,7 @@ def list_to_int_plus1(numbers: List[int]) -> int:
 
         i -= 1
     else:
-        """上のwhileでbreakしなかったら、elseに入る"""
+        """リストの先頭が10だった場合の処理"""
         if numbers[0] == 10:
             numbers[0] = 1
             numbers.append(0)

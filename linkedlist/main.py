@@ -26,38 +26,25 @@ class LinkedList(object):
     def __init__(self, head=None):
         self.head = head
 
+    # 一番後ろに追加
     def append(self, data: Any) -> None:
         new_node = Node(data)
 
         if self.head is None:
-            # 一番最初のみココはいる
             self.head = new_node
             return
 
         last_node = self.head
         while last_node.next:
-            """
-            
-            last_node.nextがNoneになったら抜けて、
-            new_nodeをそこに入れる。
-            
-            nextにNodeを付けていく
-
-            """
             last_node = last_node.next
         last_node.next = new_node
 
     def insert(self, data: Any):
         """
-        new_nodeで先頭に挿入するノードを新規作成
+        先頭に追加
 
-        そのNodeのnextに今までのノード列のself.headを連結
-        そして、self.headに先頭に挿入するnew_nodeを入れる
-
-        new_node.dataにはinsert引数のdata: Anyが入っている。
-
-        :param data: gonna append data
-        :return: None
+        :param data: 追加するデータ
+        :return　　　　　　　　: None
         """
         new_node = Node(data)
 
@@ -74,6 +61,7 @@ class LinkedList(object):
     def remove(self, data: Any):
         current_node = self.head
         if current_node and current_node.data == data:
+            # 先頭が削除したいdataだった時
             self.head = current_node.next
             current_node = None
             return

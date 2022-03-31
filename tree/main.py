@@ -7,6 +7,70 @@ class Node(object):
         self.value = value
         self.left = None
         self.right = None
+        
+        
+# 関数ver ------------------------------------------        
+def insert(node: Node, value: int) -> Node:
+    if node is None:
+        return Node(value)
+
+    if value > node.value:
+        node.right = insert(node.right,value)
+    elif value < node.value:
+        node.left = insert(node.left, value)
+    return node
+
+
+# left -> top -> right
+def inorder(node: Node):
+    if node:
+        inorder(node.left)
+        print(node.value)
+        inorder(node.right)
+
+
+def search(node: Node, target: int) -> bool:
+    if node is None:
+        return False
+
+    if target == node.value:
+        return True
+
+    elif target > node.value:
+        return search(node.right, target)
+
+    elif target < node.value:
+        return search(node.left, target)
+
+
+def min_value(node: Node) -> Node:
+    current = node
+    while current.left:
+        current = current.left
+    return current
+
+
+def remove(node: Node, value: int) -> Node:
+    if node is None:
+        return node
+
+    if value > node.value:
+        node.right = remove(node.right, value)
+    elif value < node.value:
+        node.left = remove(node.left, value)
+    else:
+        # node.value == value
+        if node.left is None:
+            return node.right
+
+        elif node.right is None:
+            return node.left
+
+        temp = min_value(node.right)
+        node.value = temp.value
+        node.right = remove(node.right, temp.value)
+    return node
+# ---------------------------------------------------
 
 
 class BinarySearchTree(object):
