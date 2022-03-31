@@ -61,6 +61,7 @@ class LinkedList(object):
     def remove(self, data: Any):
         current_node = self.head
         if current_node and current_node.data == data:
+            # 先頭が削除したいdataだった時
             self.head = current_node.next
             current_node = None
             return
