@@ -3,25 +3,13 @@ import unittest
 from typing import Any
 
 
-class Node(object):
-    """
-
-    このNodeクラスが連結していく
-
-    """
-
-    def __init__(self, data: Any, next_node: Node = None):
-        self.data = data
-        self.next = next_node
+# class Node(object):
+#     def __init__(self, data: Any, next_node: Node = None):
+#         self.data = data
+#         self.next = next_node
 
 
 class LinkedList(object):
-
-    """
-
-    先頭のheadにはまずNoneが入る
-
-    """
 
     def __init__(self, head=None):
         self.head = head
@@ -42,9 +30,7 @@ class LinkedList(object):
     def insert(self, data: Any):
         """
         先頭に追加
-
         :param data: 追加するデータ
-        :return　　　　　　　　: None
         """
         new_node = Node(data)
 
@@ -162,18 +148,124 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual("Test1", self.linked_list.head.next.next.data)
 
 
+class Node(object):
+    def __init__(self, data: Any, prev: Node = None, next_node: Node = None):
+        self.prev = prev
+        self.data = data
+        self.next = next_node
+
+
+class DoublyLinkedList(object):
+
+    def __init__(self, head=None):
+        self.head = head
+
+    def append(self, data: Any) -> None:
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+
+        current = self.head
+        while current.next:
+            current = current.next
+
+        current.next = new_node
+        new_node.prev = current
+
+    def print(self):
+        current = self.head
+        while current:
+            print(current.data)
+            current = current.next
+
+    def insert(self, data: Any):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def remove(self, target: Any):
+        current = self.head
+        # 先頭を消す場合
+        if current and current.data == target:
+            # 先頭の次が何も入ってない場合
+            if current.next is None:
+                current = None
+                self.head = None
+                return
+            else:
+                # 先頭の次が何か入っている場合
+                next = current.next
+                next.prev = None
+                current = None
+                self.head = next
+                return
+
+        elif current is None:
+            return
+
+        # 二番目以降を消す場合
+        while current and current.data != target:
+            current = current.next
+
+        if current is None:
+            return
+
+        # targetが見つかって、その次がNoneの時
+        if current.next is None:
+            prev = current.prev
+            prev.next = None
+            current = None
+            return
+        else:
+            # targetが見つかって、その次に何か入ってる場合
+            next = current.next
+            prev = current.prev
+            prev.next = next
+            next.prev = prev
+            current = None
+            return
+
+
+class TestDoublyLinkedList(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.doubly_linked_list = DoublyLinkedList()
+
+    def tearDown(self) -> None:
+        pass
+
+    def test_append(self):
+        self.doubly_linked_list.append(1)
+        self.doubly_linked_list.append(2)
+        self.doubly_linked_list.append(3)
+
+        self.assertEqual(1, self.doubly_linked_list.head.data)
+        self.assertEqual(2, self.doubly_linked_list.head.next.data)
+        self.assertEqual(3, self.doubly_linked_list.head.next.next.data)
+
+        self.assertEqual(2, self.doubly_linked_list.head.next.next.prev.data)
+        self.assertEqual(1, self.doubly_linked_list.head.next.next.prev.prev.data)
+
+    def test_insert(self):
+        self.doubly_linked_list.append(1)
+        self.doubly_linked_list.append(2)
+        self.doubly_linked_list.append(3)
+
+        self.doubly_linked_list.insert(5)
+
+        self.assertEqual(5, self.doubly_linked_list.head.data)
+
+    def test_remove(self):
+        self.doubly_linked_list.append(1)
+        self.doubly_linked_list.append(2)
+        self.doubly_linked_list.append(3)
+
+        self.doubly_linked_list.remove(2)
+
+        self.assertEqual(1, self.doubly_linked_list.head.data)
+        self.assertEqual(3, self.doubly_linked_list.head.next.data)
+
+
 if __name__ == '__main__':
     unittest.main()
-    # linked_list = LinkedList()
-    # linked_list.append('No1')
-    # linked_list.append('No2')
-    # linked_list.append('No3')
-    # linked_list.insert('No4')
-    # linked_list.remove('No3')
-    #
-    # linked_list.reverse_iterative()
-    # linked_list.print()
-    # linked_list.reverse_recursive()
-    # linked_list.print()
-    #
-    # print(linked_list.get_next_node(linked_list.head))
