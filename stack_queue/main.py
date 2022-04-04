@@ -1,6 +1,8 @@
 import unittest
 from typing import Any
 
+# これは collections.deque の実装
+
 
 class Stack(object):
 
@@ -96,7 +98,7 @@ def validate_json(chars: str) -> bool:
 
         if char in lookup.values():
             # pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
-            if not stack:
+            if stack is None:
                 return False
 
             if char != stack.pop():

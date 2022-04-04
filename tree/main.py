@@ -15,7 +15,7 @@ def insert(node: Node, value: int) -> Node:
         return Node(value)
 
     if value > node.value:
-        node.right = insert(node.right,value)
+        node.right = insert(node.right, value)
     elif value < node.value:
         node.left = insert(node.left, value)
     return node
@@ -70,7 +70,8 @@ def remove(node: Node, value: int) -> Node:
         node.value = temp.value
         node.right = remove(node.right, temp.value)
     return node
-# ---------------------------------------------------
+
+# 関数ver End ----------------------------------------------
 
 
 class BinarySearchTree(object):
@@ -95,10 +96,10 @@ class BinarySearchTree(object):
         _insert(self.root, value)
 
     # inorder: left -> node -> rightの順に見ていく
-    def inorder1(self):
+    # 小さい順に表示
+    def inorder(self):
         def _inorder(node: Node):
-            """小さい順に表示"""
-            if node is not None:
+            if node:
                 _inorder(node.left)
                 print(node.value)
                 _inorder(node.right)

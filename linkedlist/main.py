@@ -186,9 +186,9 @@ class DoublyLinkedList(object):
 
     def remove(self, target: Any):
         current = self.head
-        # 先頭を消す場合
+
         if current and current.data == target:
-            # 先頭の次が何も入ってない場合
+            # 先頭を消す場合で、先頭の次が何も入ってない場合
             if current.next is None:
                 current = None
                 self.head = None
