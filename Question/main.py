@@ -21,7 +21,7 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
         first, second = pair[0], pair[1]
 
         value = cache.get(second)
-        if not value:
+        if value is None:
             cache[first] = second
 
         if value == first:
