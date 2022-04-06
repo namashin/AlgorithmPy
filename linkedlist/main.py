@@ -157,7 +157,7 @@ class Node(object):
 
 class DoublyLinkedList(object):
 
-    def __init__(self, head=None):
+    def __init__(self, head: Node = None):
         self.head = head
 
     def append(self, data: Any) -> None:
@@ -181,6 +181,11 @@ class DoublyLinkedList(object):
 
     def insert(self, data: Any):
         new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+
+        self.head.prev = new_node
         new_node.next = self.head
         self.head = new_node
 
