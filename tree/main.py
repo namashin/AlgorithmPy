@@ -128,7 +128,7 @@ class BinarySearchTree(object):
     @staticmethod
     def get_minimum_node(node: Node) -> Node:
         current = node
-        while current.left is not None:
+        while current.left:
             current = current.left
         return current
 
