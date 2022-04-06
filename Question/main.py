@@ -30,8 +30,7 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
             
 # value = cache.get(second)　について           
 # getメソッドは指定されたキーがdictにあれば値を返し、なければデフォルトでNone、指定されていれば第2引数の値を返します。            
-            
-            
+
 
 """
 

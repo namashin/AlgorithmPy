@@ -125,7 +125,8 @@ class BinarySearchTree(object):
                 return _search(node.right, target)
         return _search(self.root, target)
 
-    def min_value(self, node: Node) -> Node:
+    @staticmethod
+    def get_minimum_node(node: Node) -> Node:
         current = node
         while current.left is not None:
             current = current.left
@@ -146,7 +147,7 @@ class BinarySearchTree(object):
                 elif target > node.value:
                     return node.left
 
-                temp = self.min_value(node.right)
+                temp = self.get_minimum_node(node.right)
                 node.value = temp.value
                 node.right = _remove(node.right, temp.value)
             return node
@@ -196,9 +197,9 @@ class TestBinarySearchTree(unittest.TestCase):
         is_there = self.bst.search(top_left_value)
         self.assertFalse(is_there)
 
-    def test_min_value(self):
+    def test_get_minimum_node(self):
         node = self.bst.root
-        min_node = self.bst.min_value(node)
+        min_node = self.bst.get_minimum_node(node)
 
         self.assertEqual(min_node.value, 1)
 
