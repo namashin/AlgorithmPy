@@ -4,7 +4,7 @@
 ## Contents
 sort<br>
 binary search<br>
-linkedlist<br>
+linkedList<br>
 hashtable<br>
 stack & queue<br>
 binary search three<br>

@@ -1,5 +1,3 @@
-import random
-import unittest
 from typing import List
 
 
@@ -40,46 +38,3 @@ def insertion_sort(numbers: List[int]) -> List[int]:
         numbers[j+1] = temp
 
     return numbers
-
-
-class TestSorts(unittest.TestCase):
-
-    def setUp(self) -> None:
-        self.nums = [random.randint(0, 100) for _ in range(10)]
-
-    def tearDown(self) -> None:
-        pass
-
-    def test_bubble_sort(self):
-        bubble_sort(self.nums)
-
-        for i, num in enumerate(self.nums):
-            try:
-                # self.nums[i + 1] >= num
-                self.assertGreaterEqual(self.nums[i + 1], num)
-            except IndexError:
-                continue
-
-    def test_selection_sort(self):
-        selection_sort(self.nums)
-
-        for i, num in enumerate(self.nums):
-            try:
-                # self.nums[i + 1] >= num
-                self.assertGreaterEqual(self.nums[i + 1], num)
-            except IndexError:
-                continue
-
-    def test_insertion_sort(self):
-        insertion_sort(self.nums)
-
-        for i, num in enumerate(self.nums):
-            try:
-                # self.nums[i + 1] >= num
-                self.assertGreaterEqual(self.nums[i + 1], num)
-            except IndexError:
-                continue
-
-
-if __name__ == '__main__':
-    unittest.main()
