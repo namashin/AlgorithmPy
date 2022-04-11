@@ -89,7 +89,8 @@ class LinkedList(object):
             current = None
             return
 
-    def get_next_node(self, node: Node) -> Any:
+    @staticmethod
+    def get_next_node(node: Node) -> Any:
         return node.next.data
 
     def reverse_iterative(self):
@@ -249,6 +250,21 @@ class DoublyLinkedList(object):
 
         self.head = _reverse_recursive(self.head)
         return
+
+    def reverse_recursive_2(self):
+        def _reverse_recursive(current: Node):
+            previous = current.prev
+            current.prev = current.next
+            current.next = previous
+
+            current = current.prev
+
+            if current is None:
+                return previous.prev
+
+            return _reverse_recursive(current)
+
+        self.head = _reverse_recursive(self.head)
 
     def sort(self):
         if self.head is None:
