@@ -72,8 +72,6 @@ def remove(node: Node, value: int) -> Optional:
         node.right = remove(node.right, temp.value)
     return node
 
-# 関数ver End ----------------------------------------------
-
 
 class BinarySearchTree(object):
 
@@ -107,7 +105,7 @@ class BinarySearchTree(object):
         _inorder(self.root)
 
     def inorder2(self, node: Node):
-        if node is not None:
+        if node:
             yield from self.inorder2(node.left)
             yield node.value
             yield from self.inorder2(node.right)
