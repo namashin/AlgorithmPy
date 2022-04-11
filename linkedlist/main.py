@@ -57,6 +57,38 @@ class LinkedList(object):
         previous_node.next = current_node.next
         current_node = None
 
+    def remove2(self, target: int) -> None:
+        if self.head is None:
+            return
+
+        current = self.head
+        if current and current.data == target:
+            if current.next is None:
+                self.head = None
+                current = None
+                return
+            else:
+                self.head = current.next
+                current = None
+                return
+
+        previous = None
+        while current and current.data != target:
+            previous = current
+            current = current.next
+
+        if current is None:
+            return
+
+        if current.next is None:
+            previous.next = None
+            current = None
+            return
+        else:
+            previous.next = current.next
+            current = None
+            return
+
     def get_next_node(self, node: Node) -> Any:
         return node.next.data
 
@@ -140,6 +172,7 @@ class DoublyLinkedList(object):
             self.head = new_node
             return
 
+        # self.head にNodeがすでに入っている場合
         self.head.prev = new_node
         new_node.next = self.head
         self.head = new_node
@@ -160,9 +193,6 @@ class DoublyLinkedList(object):
                 current = None
                 self.head = next
                 return
-
-        elif current is None:
-            return
 
         # 二番目以降を消す場合
         while current and current.data != target:
