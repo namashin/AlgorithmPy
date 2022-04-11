@@ -194,7 +194,11 @@ class DoublyLinkedList(object):
             current.prev = current.next
             current.next = previous
 
-            current = current.prev
+            # appendの時は while current.next:
+            # で次のnextがあるかどうか見ていた
+            # 今回はreverseなので、nextではなく
+            # prevがあるかを見ている。
+            current = current.prev   
 
         if previous:
             self.head = previous.prev
