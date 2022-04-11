@@ -9,7 +9,8 @@ class Node(object):
         self.right = None
 
 
-# 関数ver ------------------------------------------        
+# 関数ver ------------------------------------------
+
 def insert(node: Node, value: int) -> Node:
     if node is None:
         return Node(value)

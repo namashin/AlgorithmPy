@@ -1,16 +1,12 @@
 import operator
-import random
-import unittest
 from typing import List, Tuple
 from collections import Counter
+
+
 """
-
 find symmetric:
-
 input = [(1, 2), (3, 5), (5, 3), (7, 4), (4, 7), (8, 1), (5, 7)]
-
 answer: (3, 5), (7, 4)
-
 """
 
 
@@ -33,11 +29,8 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
 
 
 """
-
 Count most appear str in the sentence.
-
-input = 'hello world, to all people in this world. loy
-
+input = 'hello world, to all people in this world.
 answer: 
 """
 
@@ -45,7 +38,7 @@ answer:
 def count_words_no1(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
 
-    cache = [] # list
+    cache = []  # list
     for char in chars:
         if not char.isspace():
             cache.append((char, chars.count(char)))
@@ -58,7 +51,7 @@ def count_words_no1(chars: str) -> Tuple[str, int]:
 
 def count_words_no2(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
-    cache = {} # dict
+    cache = {}  # dict
 
     for char in chars:
         if not char.isspace():
@@ -200,10 +193,13 @@ def remove_zero(numbers: List[int]) -> None:
 def list_to_int(numbers: List[int]) -> int:
     """
     ex:
-    [1, 2, 4] を reversedして[4, 2, 1]
-    4 * (10 ** 0) + 2 * (10 ** 1) + 1 * (10 ** 2)
+    [1, 2, 4] を 124 としたい
 
-    >>> 124
+    reversedして[4, 2, 1]
+    4 * (10 ** 0) + 2 * (10 ** 1) + 1 * (10 ** 2)
+    4 + 20 + 100
+
+    = 124
     """
     sum_numbers_of_list = 0
     for i, num in enumerate(reversed(numbers)):
@@ -243,7 +239,7 @@ def validate_json(chars: str) -> bool:
         if char in lookup.keys():
             stack.append(lookup[char])
 
-        if char in lookup.values():
+        elif char in lookup.values():
             # pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
             if stack is None:
                 return False
@@ -259,5 +255,5 @@ def validate_json(chars: str) -> bool:
 
 
 if __name__ == '__main__':
-    input = 'hello world, to all people in this world. loy'
-    print(count_words_no1(input))
+    input_value = 'hello world, to all people in this world. loy'
+    print(count_words_no1(input_value))

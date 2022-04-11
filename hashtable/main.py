@@ -47,22 +47,3 @@ class HashTable(object):
             print(data, end='')
 
             print()
-
-
-if __name__ == '__main__':
-    hash_table = HashTable()
-    hash_table.add('pc', 'mac')
-    hash_table.add('phone', 'iPhone')
-    hash_table.add('phone', 'sumsung')
-    hash_table.add('car', 'toyota')
-    hash_table.add('sns', 'youtube')
-
-    hash_table['os'] = 'windows'
-
-    hash_table.print()
-    print("############")
-    hash_table.delete('pc')
-    hash_table.delete('car')
-    hash_table.print()
-
-    print(hash_table['os'])

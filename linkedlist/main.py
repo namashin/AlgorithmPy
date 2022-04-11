@@ -1,6 +1,5 @@
 from __future__ import annotations
-import unittest
-from typing import Any
+from typing import Any, Optional
 
 
 # class Node(object):
@@ -14,7 +13,6 @@ class LinkedList(object):
     def __init__(self, head=None):
         self.head = head
 
-    # 一番後ろに追加
     def append(self, data: Any) -> None:
         new_node = Node(data)
 
@@ -28,10 +26,6 @@ class LinkedList(object):
         last_node.next = new_node
 
     def insert(self, data: Any):
-        """
-        先頭に追加
-        :param data: 追加するデータ
-        """
         new_node = Node(data)
 
         new_node.next = self.head
@@ -80,8 +74,8 @@ class LinkedList(object):
         self.head = previous_node
 
     def reverse_recursive(self):
-        def _reverse_recursive(current_node: Node, previous_node: Node):
-            if not current_node:  # if current_node is None
+        def _reverse_recursive(current_node: Node, previous_node: Optional[Node]):
+            if current_node is None:
                 return previous_node
 
             next_node = current_node.next
@@ -91,61 +85,22 @@ class LinkedList(object):
             return _reverse_recursive(current_node, previous_node)
 
         self.head = _reverse_recursive(self.head, None)
+        return
 
+    def sort(self):
+        if self.head is None:
+            return
 
-class TestLinkedList(unittest.TestCase):
+        current = self.head
+        while current:
+            next_node = current.next
+            while next_node:
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
 
-    def setUp(self) -> None:
-        self.linked_list = LinkedList()
-
-    def tearDown(self) -> None:
-        pass
-
-    def test_append(self):
-        self.linked_list.append("Test1")
-        self.linked_list.append("Test2")
-        self.linked_list.append("Test3")
-
-        self.assertEqual("Test1", self.linked_list.head.data)
-        self.assertEqual("Test2", self.linked_list.head.next.data)
-        self.assertEqual("Test3", self.linked_list.head.next.next.data)
-
-    def test_insert(self):
-        self.linked_list.append("Test1")
-        self.linked_list.append("Test2")
-        self.linked_list.append("Test3")
-
-        self.linked_list.insert("Test4")
-        self.assertEqual("Test4", self.linked_list.head.data)
-
-    def test_remove(self):
-        self.linked_list.append("Test1")
-        self.linked_list.append("Test2")
-
-        self.linked_list.remove("Test1")
-        self.assertEqual("Test2", self.linked_list.head.data)
-
-    def test_reverse_iterative(self):
-        self.linked_list.append("Test1")
-        self.linked_list.append("Test2")
-        self.linked_list.append("Test3")
-
-        self.linked_list.reverse_iterative()
-
-        self.assertEqual("Test3", self.linked_list.head.data)
-        self.assertEqual("Test2", self.linked_list.head.next.data)
-        self.assertEqual("Test1", self.linked_list.head.next.next.data)
-
-    def test_reverse_recursive(self):
-        self.linked_list.append("Test1")
-        self.linked_list.append("Test2")
-        self.linked_list.append("Test3")
-
-        self.linked_list.reverse_recursive()
-
-        self.assertEqual("Test3", self.linked_list.head.data)
-        self.assertEqual("Test2", self.linked_list.head.next.data)
-        self.assertEqual("Test1", self.linked_list.head.next.next.data)
+            current = current.next
+        return
 
 
 class Node(object):
@@ -259,52 +214,19 @@ class DoublyLinkedList(object):
             return _reverse_recursive(current.prev)
 
         self.head = _reverse_recursive(self.head)
+        return
 
+    def sort(self):
+        if self.head is None:
+            return
 
-class TestDoublyLinkedList(unittest.TestCase):
+        current = self.head
+        while current:
+            next_node = current.next
+            while next_node:
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
 
-    def setUp(self) -> None:
-        self.doubly_linked_list = DoublyLinkedList()
-        self.doubly_linked_list.append(1)
-        self.doubly_linked_list.append(2)
-        self.doubly_linked_list.append(3)
-
-    def tearDown(self) -> None:
-        pass
-
-    def test_append(self):
-        self.assertEqual(1, self.doubly_linked_list.head.data)
-        self.assertEqual(2, self.doubly_linked_list.head.next.data)
-        self.assertEqual(3, self.doubly_linked_list.head.next.next.data)
-
-        self.assertEqual(2, self.doubly_linked_list.head.next.next.prev.data)
-        self.assertEqual(1, self.doubly_linked_list.head.next.next.prev.prev.data)
-
-    def test_insert(self):
-        self.doubly_linked_list.insert(5)
-
-        self.assertEqual(5, self.doubly_linked_list.head.data)
-
-    def test_remove(self):
-        self.doubly_linked_list.remove(2)
-
-        self.assertEqual(1, self.doubly_linked_list.head.data)
-        self.assertEqual(3, self.doubly_linked_list.head.next.data)
-
-    def test_reverse_iterative(self):
-        self.doubly_linked_list.reverse_iterative()
-
-        self.assertEqual(3, self.doubly_linked_list.head.data)
-        self.assertEqual(2, self.doubly_linked_list.head.next.data)
-        self.assertEqual(1, self.doubly_linked_list.head.next.next.data)
-
-    def test_reverse_recursive(self):
-        self.doubly_linked_list.reverse_recursive()
-
-        self.assertEqual(3, self.doubly_linked_list.head.data)
-        self.assertEqual(2, self.doubly_linked_list.head.next.data)
-        self.assertEqual(1, self.doubly_linked_list.head.next.next.data)
-
-
-if __name__ == '__main__':
-    unittest.main()
+            current = current.next
+        return

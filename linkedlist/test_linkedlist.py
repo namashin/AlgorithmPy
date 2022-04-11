@@ -56,6 +56,19 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual("Test2", self.linked_list.head.next.data)
         self.assertEqual("Test1", self.linked_list.head.next.next.data)
 
+    def test_sort(self) -> None:
+        self.linked_list.append(4)
+        self.linked_list.append(2)
+        self.linked_list.append(7)
+        self.linked_list.append(5)
+
+        self.linked_list.sort()
+
+        self.assertEqual(2, self.linked_list.head.data)
+        self.assertEqual(4, self.linked_list.head.next.data)
+        self.assertEqual(5, self.linked_list.head.next.next.data)
+        self.assertEqual(7, self.linked_list.head.next.next.next.data)
+
 
 class TestDoublyLinkedList(unittest.TestCase):
 
@@ -100,6 +113,17 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.assertEqual(3, self.doubly_linked_list.head.data)
         self.assertEqual(2, self.doubly_linked_list.head.next.data)
         self.assertEqual(1, self.doubly_linked_list.head.next.next.data)
+
+    def test_sort(self):
+        self.doubly_linked_list.append(0)
+        self.doubly_linked_list.append(9)
+        self.doubly_linked_list.sort()
+
+        self.assertEqual(0, self.doubly_linked_list.head.data)
+        self.assertEqual(1, self.doubly_linked_list.head.next.data)
+        self.assertEqual(2, self.doubly_linked_list.head.next.next.data)
+        self.assertEqual(3, self.doubly_linked_list.head.next.next.next.data)
+        self.assertEqual(9, self.doubly_linked_list.head.next.next.next.next.data)
 
 
 if __name__ == '__main__':
