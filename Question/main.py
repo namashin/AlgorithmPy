@@ -254,6 +254,11 @@ def validate_json(chars: str) -> bool:
     return True
 
 
-if __name__ == '__main__':
-    input_value = 'hello world, to all people in this world. loy'
-    print(count_words_no1(input_value))
+# list_in_list = [1, 4, 6, [2, 4], [3, 4, [7, 3, 2], 3], 9]
+# リストの中のリストを全て平らに
+def flatten(list_in_list):
+    for i in list_in_list:
+        if isinstance(i, list):
+            yield from flatten(i)
+        else:
+            yield i
