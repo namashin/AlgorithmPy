@@ -124,6 +124,7 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
             if x_value < y_value:
                 x[:] = [i for i in x if i != x_key]
 
+                # これをリスト内表記化させた。
                 # x = []
                 # for i in x:
                 #     if i != x_key:
@@ -148,7 +149,7 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
 # >>> 123
 
 
-def list_to_int_plus1(numbers: List[int]) -> int:
+def list_to_int_plus1_part1(numbers: List[int]) -> int:
     # リストの一番後ろのインデックス取得 (i)
     i = len(numbers) - 1
     numbers[i] += 1
@@ -182,6 +183,24 @@ def list_to_int_plus1(numbers: List[int]) -> int:
             numbers.append(0)
 
     return list_to_int(numbers)
+
+
+def list_to_int_plus1_part2(numbers: List[int]) -> int:
+    i = len(numbers) - 1
+    numbers[i] += 1
+
+    while 0 < i:
+        if numbers[i] != 10:
+            remove_zero(numbers)
+            break
+
+        elif numbers[i] == 10:
+            numbers[i] = 0
+            numbers[i-1] += 1
+
+        i -= 1
+
+    return list_to_int_plus1_part1(numbers)
 
 
 def remove_zero(numbers: List[int]) -> None:
