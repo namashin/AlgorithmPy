@@ -153,18 +153,6 @@ def list_to_int_plus1_part1(numbers: List[int]) -> int:
     # リストの一番後ろのインデックス取得 (i)
     i = len(numbers) - 1
     numbers[i] += 1
-    
-    # これでもいいのでは？
-    # while i > 0:
-    #     if numbers[i] != 10:
-    #         remove_zero(numbers)
-    #         break
-    # 
-    #     elif numbers[i] == 10:
-    #         numbers[i] = 0
-    #         numbers[i-1] += 1
-    # 
-    #     i -= 1
 
     while i > 0:
         if numbers[i] != 10:
