@@ -234,8 +234,8 @@ class DoublyLinkedList(object):
         if previous:
             self.head = previous.prev
 
-    def reverse_recursive(self):
-        def _reverse_recursive(current: Node):
+    def reverse_recursive_1(self):
+        def _reverse_recursive_1(current: Node):
             if current is None:
                 return None
 
@@ -246,13 +246,13 @@ class DoublyLinkedList(object):
             if current.prev is None:
                 return current
 
-            return _reverse_recursive(current.prev)
+            return _reverse_recursive_1(current.prev)
 
-        self.head = _reverse_recursive(self.head)
+        self.head = _reverse_recursive_1(self.head)
         return
 
     def reverse_recursive_2(self):
-        def _reverse_recursive(current: Node):
+        def _reverse_recursive_2(current: Node):
             previous = current.prev
             current.prev = current.next
             current.next = previous
@@ -262,9 +262,10 @@ class DoublyLinkedList(object):
             if current is None:
                 return previous.prev
 
-            return _reverse_recursive(current)
+            return _reverse_recursive_2(current)
 
-        self.head = _reverse_recursive(self.head)
+        self.head = _reverse_recursive_2(self.head)
+        return
 
     def sort(self):
         if self.head is None:
