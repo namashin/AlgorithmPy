@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 
+# 一方向リンクリスト用のノードクラス
 # class Node(object):
 #     def __init__(self, data: Any, next_node: Node = None):
 #         self.data = data
@@ -136,6 +137,7 @@ class LinkedList(object):
         return
 
 
+# 双方向リンクリスト用のノードクラス
 class Node(object):
     def __init__(self, data: Any, prev: Node = None, next_node: Node = None):
         self.prev = prev
