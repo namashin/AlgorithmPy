@@ -1,7 +1,7 @@
 from typing import Any
+from collections import deque
 
 
-# これは collections.deque の実装
 class Stack(object):
 
     def __init__(self):
@@ -32,17 +32,9 @@ class Queue(object):
         print(self.queue)
 
 
-if __name__ == '__main__':
-    stack = Stack()
-    stack.push('No1')
-    stack.push('No2')
-    stack.push('No3')
-    print(stack.pop())
-    stack.print()
-
-    queue = Queue()
-    queue.push('No1')
-    queue.push('No2')
-    queue.push('No3')
-    print(queue.pop())
-    queue.print()
+# collections.deque のreverseメソッドの実装
+def reverse(d: deque) -> deque:
+    new_deque = deque()
+    while d:
+        new_deque.append(d.pop())
+    return new_deque
