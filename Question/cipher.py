@@ -35,18 +35,22 @@ def caesar_cipher_2(clear_text: str, shift: int) -> str:
     return result
 
 
-def caesar_cipher_hacking(clear_text: str) -> Generator[Tuple[int, str], None, None]:
+def caesar_cipher_hacking(encrypted_text: str) -> Generator[Tuple[int, str], None, None]:
     len_alphabet = len(string.ascii_uppercase)
 
+    # このシーザー暗号が何回シフトさせるのか分からないから
+    # アルファベットの数(26)だけ回す。
     for candidate_shift in range(1, len_alphabet + 1):
         result = ''
-        for char in clear_text:
+        for char in encrypted_text:
             if char.isupper():
                 alphabet = string.ascii_uppercase
             elif char.islower():
                 alphabet = string.ascii_lowercase
             else:
                 result += char
+                # elseブロックの中にcontinueを書くと、それ以降に書かれているループの外側の処理を全てスキップします。
+                # for文のcontinueは、特定の条件の時に処理をスキップして次の処理に移る、というものです。
                 continue
 
             shifted_index = alphabet.index(char) - candidate_shift
