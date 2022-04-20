@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 
+# 一方向リンクリスト用のノードクラス
 # class Node(object):
 #     def __init__(self, data: Any, next_node: Node = None):
 #         self.data = data
@@ -136,6 +137,7 @@ class LinkedList(object):
         return
 
 
+# 双方向リンクリスト用のノードクラス
 class Node(object):
     def __init__(self, data: Any, prev: Node = None, next_node: Node = None):
         self.prev = prev
@@ -234,11 +236,11 @@ class DoublyLinkedList(object):
         if previous:
             self.head = previous.prev
 
-    def reverse_recursive(self):
-        def _reverse_recursive(current: Node):
-            if current is None:
-                return None
-
+    def reverse_recursive_1(self):
+        if self.head is None:
+            return
+        
+        def _reverse_recursive_1(current: Node):
             prev = current.prev
             current.prev = current.next
             current.next = prev
@@ -246,13 +248,16 @@ class DoublyLinkedList(object):
             if current.prev is None:
                 return current
 
-            return _reverse_recursive(current.prev)
+            return _reverse_recursive_1(current.prev)
 
-        self.head = _reverse_recursive(self.head)
+        self.head = _reverse_recursive_1(self.head)
         return
 
     def reverse_recursive_2(self):
-        def _reverse_recursive(current: Node):
+        if self.head is None:
+            return
+        
+        def _reverse_recursive_2(current: Node):
             previous = current.prev
             current.prev = current.next
             current.next = previous
@@ -262,9 +267,10 @@ class DoublyLinkedList(object):
             if current is None:
                 return previous.prev
 
-            return _reverse_recursive(current)
+            return _reverse_recursive_2(current)
 
-        self.head = _reverse_recursive(self.head)
+        self.head = _reverse_recursive_2(self.head)
+        return
 
     def sort(self):
         if self.head is None:
