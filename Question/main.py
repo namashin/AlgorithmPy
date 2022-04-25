@@ -269,3 +269,109 @@ def flatten(list_in_list):
             yield from flatten(i)
         else:
             yield i
+
+
+# 全ての順列を表示させる
+# from itertools import permutations
+#
+# for r in permutations([1, 2, 3]):
+#     print(r)
+#
+# これと同じ関数を自作
+
+def all_perms_v1(elements: List[int]) -> List[List[int]]:
+    result = []
+
+    if len(elements) <= 1:
+        return [elements]
+
+    for perms in all_perms_v1(elements[1:]):
+        for i in range(len(elements)):
+            result.append(perms[:i] + elements[0:1] + perms[i:])
+
+    return result
+
+
+def all_perms_v2(elements: List[int]) -> List[List[int]]:
+    if len(elements) <= 1:
+        yield elements
+
+    for perms in all_perms_v1(elements[1:]):
+        for i in range(len(elements)):
+            yield perms[:i] + elements[0:1] + perms[i:]
+
+
+# 与えられた数字が含む全ての素数を表示
+def generate_primes_v1(number: int) -> List[int]:
+    primes = []
+    for x in range(2, number + 1):
+        for y in range(2, x):
+            if x % y == 0:
+                break
+        else:
+            primes.append(x)
+
+    return primes
+
+
+def generate_primes_v2(number: int) -> List[int]:
+    primes = []
+    cache = {}
+
+    for x in range(2, number + 1):
+        is_prime = cache.get(x)
+        if is_prime is False:
+            continue
+
+        primes.append(x)
+        cache[x] = True
+        for y in range(x*2, number + 1, x):
+            cache[y] = False
+
+    return primes
+
+
+# yield 使用
+def generate_primes_v3(number: int) -> List[int]:
+    cache = {}
+
+    for x in range(2, number + 1):
+        is_prime = cache.get(x)
+        if is_prime is False:
+            continue
+
+        yield x
+        cache[x] = True
+        for y in range(x*2, number + 1, x):
+            cache[y] = False
+
+
+# Palindrome 作成
+# text = 'aba' # => True
+# text = 'aba' # => False
+# text = 'racecar'  # => True
+# 方法１
+# print(text == text[::-1])
+#
+# 方法２
+# print(text == ''.join(reversed(text)))
+
+
+def is_palindrome(check_text: str) -> bool:
+    len_text = len(check_text)
+    if not len_text:
+        return False
+
+    if len_text == 1:
+        return True
+
+    start = 0
+    end = len_text - 1
+    while start < end:
+        if check_text[start] != check_text[end]:
+            return False
+
+        start += 1
+        end -= 1
+
+    return True
