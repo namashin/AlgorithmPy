@@ -3,6 +3,40 @@ from typing import List, Tuple
 from collections import Counter
 
 
+
+"""
+偶数奇数並び替え
+偶数先、奇数後
+"""
+def even_first_odd_last(numbers: List[int]) -> List[int]:
+    evens = []
+    odds = []
+
+    for number in numbers:
+        if number % 2 == 0:
+            evens.append(number)
+        else:
+            odds.append(number)
+
+    numbers[:] = evens + odds
+
+    return numbers
+
+
+def even_first_odd_last_v2(numbers: List[int]) -> List[int]:
+    left, right = 0, len(numbers) - 1
+
+    while left < right:
+        if numbers[left] % 2 == 0:
+            left += 1
+        else:
+            numbers[left], numbers[right] = numbers[right], numbers[left]
+            right -= 1
+
+    return numbers
+
+
+
 """
 find symmetric:
 input = [(1, 2), (3, 5), (5, 3), (7, 4), (4, 7), (8, 1), (5, 7)]
