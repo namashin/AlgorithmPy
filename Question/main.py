@@ -4,6 +4,34 @@ from collections import Counter
 
 
 
+# l = ['y', 'n', 'p', 't', 'o', 'h']
+# i = [1, 5, 0, 2, 4, 3]
+# 指定のinde通りに並び替え
+def order_list_by_index(chars: List[str], indexes: List[int]) -> str:
+    i, len_indexes = 0, len(indexes)
+
+    while i < len_indexes:
+        while i != indexes[i]:
+            index = indexes[i]
+
+            chars[i], chars[index] = chars[index], chars[i]
+            indexes[i], indexes[index] = indexes[index], indexes[i]
+
+        i += 1
+
+    return ''.join(chars)
+
+
+def order_list_by_index_v2(chars: List[str], indexes: List[int]) -> str:
+    tmp = [None] * len(chars)
+
+    for i, index in enumerate(indexes):
+        tmp[index] = chars[i]
+
+    return ''.join(tmp)
+
+
+
 """
 偶数奇数並び替え
 偶数先、奇数後
