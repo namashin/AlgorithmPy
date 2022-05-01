@@ -3,6 +3,59 @@ from typing import List, Tuple
 from collections import Counter
 
 
+
+# 素数判定
+def is_prime(number: int) -> bool:
+    if number <= 1:
+        return False
+
+    for i in range(2, number):
+        if number % i == 0:
+            return False
+
+    return True
+
+
+def is_prime_v2(number: int) -> bool:
+    if number <= 1:
+        return False
+
+    for i in range(2, math.floor(math.sqrt(number) + 1)):
+        if number % i == 0:
+            return False
+
+    return True
+
+
+def is_prime_v3(number: int) -> bool:
+    if number <= 1:
+        return False
+
+    i = 2
+    while i < number:
+        if number % i == 0:
+            return False
+
+        i += 1
+
+    return True
+
+
+def is_prime_v4(number: int) -> bool:
+    if number <= 1:
+        return False
+
+    if number % 2 == 0 and number % 3 == 0:
+        return False
+
+    for i in range(5, math.floor(math.sqrt(number + 1)), 6):
+        if number % i == 0:
+            return False
+
+    return True
+
+
+
 # すでにsortされている事を想定
 # 重複を削除
 #
