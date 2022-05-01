@@ -3,6 +3,60 @@ from typing import List, Tuple
 from collections import Counter
 
 
+# 外側から見ていくパターン
+def is_palindrome(chars: str) -> bool:
+    len_chars = len(chars)
+
+    if not len_chars:
+        return False
+
+    if len_chars == 1:
+        return True
+
+    left, right = 0, len_chars - 1
+    while left < right:
+        if chars[left] != chars[right]:
+            return False
+
+        left += 1
+        right -= 1
+
+    return True
+
+
+# 内側から見ていくパターン
+def find_palindrome(chars: str, left: int, right: int) -> List[str]:
+    result = []
+    while 0 <= left and right <= len(chars) - 1:
+        if chars[left] != chars[right]:
+            break
+
+        result.append(chars[left: right + 1])
+        left -= 1
+        right += 1
+
+    return result
+
+
+def find_all_palindrome(chars: str):
+    result = []
+    len_chars = len(chars)
+
+    if not len_chars:
+        return result
+
+    if len_chars == 1:
+        result.append(chars)
+
+    # aba パターン
+    # abba パターン
+    for i in range(1, len_chars - 1):
+        [result.append(s) for s in find_palindrome(chars, i - 1, i + 1)]
+        [result.append(s) for s in find_palindrome(chars, i, i + 1)]
+
+    return result
+
+
 
 # l = ['y', 'n', 'p', 't', 'o', 'h']
 # i = [1, 5, 0, 2, 4, 3]
