@@ -57,6 +57,34 @@ def find_all_palindrome(chars: str):
     return result
 
 
+# 回文かどうか内側から見ていくパターン
+def find_palindrome_v2(chars: str, left: int, right: int) -> Generator:
+    while 0 <= left and right <= len(chars) - 1:
+        if chars[left] != chars[right]:
+            break
+
+        yield chars[left: right + 1]
+
+        left -= 1
+        right += 1
+
+
+def find_all_palindrome_v2(chars: str) -> Generator:
+    len_chars = len(chars)
+
+    if not len_chars:
+        yield
+
+    if len_chars == 1:
+        yield chars
+
+    # aba パターン
+    # abba パターン
+    for i in range(1, len_chars - 1):
+        yield from find_palindrome_v2(chars, i - 1, i + 1)
+        yield from find_palindrome_v2(chars, i, i + 1)
+
+
 
 # l = ['y', 'n', 'p', 't', 'o', 'h']
 # i = [1, 5, 0, 2, 4, 3]
