@@ -175,8 +175,8 @@ def find_all_palindrome(chars: str):
     if len_chars == 1:
         result.append(chars)
 
-    # aba パターン
-    # abba パターン
+    # aba 奇数パターン
+    # abba 偶数パターン
     for i in range(1, len_chars - 1):
         [result.append(s) for s in find_palindrome(chars, i - 1, i + 1)]
         [result.append(s) for s in find_palindrome(chars, i, i + 1)]
