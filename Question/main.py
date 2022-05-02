@@ -36,6 +36,16 @@ def phone_mnemonic(telephone_number: str):
     return candidate
 
 
+# n = '568-379-8466'
+#
+# for p in phone_mnemonic(n):
+#     if p == 'LOVEPYTHON':
+#         print(p)
+# 
+# >>> LOVEPYTHON
+
+
+
 # 素数判定
 def is_prime(number: int) -> bool:
     if number <= 1:
