@@ -3,6 +3,39 @@ from typing import List, Tuple
 from collections import Counter
 
 
+
+# from itertools import permutations
+# for p in permutations([1, 2, 3]):
+#     print(p)
+#
+# これと同じ事
+#
+# 全ての順列パターン表示
+
+def all_perms(elements: List[int]) -> List[List[int]]:
+    result = []
+
+    if len(elements) <= 1:
+        return [elements]
+
+    for perms in all_perms(elements[1:]):
+        for i in range(len(elements)):
+            result.append(perms[:i] + elements[0:1] + perms[i:])
+
+    return result
+
+
+def all_perms_v2(elements: List[int]) -> Generator:
+
+    if len(elements) <= 1:
+        return [elements]
+
+    for perms in all_perms(elements[1:]):
+        for i in range(len(elements)):
+            yield perms[:i] + elements[0:1] + perms[i:]
+
+            
+            
 # 電話番号のメモニック
 NUM_ALPHABET = {
     0: '+',
