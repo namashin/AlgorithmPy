@@ -3,7 +3,70 @@ from typing import List, Tuple
 from collections import Counter
 
 
+# スネーク文字表示
+def snake_print(numbers: str) -> List[List[str]]:
+    result = [[], [], []]
+    result_indexes = {0, 1, 2}
+    insert_index = 1
 
+    for i, number in enumerate(numbers):
+        if i % 4 == 1:
+            insert_index = 0
+        elif i % 2 == 0:
+            insert_index = 1
+        elif i % 4 == 3:
+            insert_index = 2
+
+        result[insert_index].append(number)
+        for rest_index in result_indexes - {insert_index}:
+            result[rest_index].append(' ')
+    
+    return result
+
+    # return result
+    # 
+    # nums = [str(i) for _ in range(3) for i in range(0, 10)]
+    # nums = ''.join(nums)
+    # for line in snake_print(nums):
+    #     print(''.join(line))
+
+
+def snake_print2(chars: str, depth: int):
+    result = [[] for _ in range(depth)]
+    result_indexes = {i for i in range(depth)}
+    insert_index = int(depth / 2)
+
+    def pos(i):
+        return i + 1
+
+    def neg(i):
+        return i - 1
+
+    op = neg
+
+    for char in chars:
+        result[insert_index].append(char)
+        for rest_indexes in result_indexes - {insert_index}:
+            result[rest_indexes].append(' ')
+
+        if insert_index == 0:
+            op = pos
+        if depth - 1 == insert_index:
+            op = neg
+
+        insert_index = op(insert_index)
+
+    return result
+
+
+    # import string
+    # alpha = [s for _ in range(2) for s in string.ascii_lowercase]
+    # strings = ''.join(alpha)
+    #
+    # for line in snake_print2(strings, 8):
+    #     print(''.join(line))
+
+    
 # from itertools import permutations
 # for p in permutations([1, 2, 3]):
 #     print(p)
