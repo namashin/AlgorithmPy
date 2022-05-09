@@ -42,7 +42,7 @@ def snake_print2(chars: str, depth: int):
         return i + 1
 
     # pos = lambda i: i + 1
-    # neg = lambda i: i + 1
+    # neg = lambda i: i - 1
 
     def neg(i):
         return i - 1
@@ -93,7 +93,6 @@ def all_perms(elements: List[int]) -> List[List[int]]:
 
 
 def all_perms_v2(elements: List[int]) -> Generator:
-
     if len(elements) <= 1:
         return [elements]
 
@@ -261,6 +260,18 @@ def find_palindrome(chars: str, left: int, right: int) -> List[str]:
     return result
 
 
+# 回文かどうか内側から見ていくパターン
+def find_palindrome_v2(chars: str, left: int, right: int) -> Generator:
+    while 0 <= left and right <= len(chars) - 1:
+        if chars[left] != chars[right]:
+            break
+
+        yield chars[left: right + 1]
+
+        left -= 1
+        right += 1
+
+
 def find_all_palindrome(chars: str):
     result = []
     len_chars = len(chars)
@@ -278,18 +289,6 @@ def find_all_palindrome(chars: str):
         [result.append(s) for s in find_palindrome(chars, i, i + 1)]
 
     return result
-
-
-# 回文かどうか内側から見ていくパターン
-def find_palindrome_v2(chars: str, left: int, right: int) -> Generator:
-    while 0 <= left and right <= len(chars) - 1:
-        if chars[left] != chars[right]:
-            break
-
-        yield chars[left: right + 1]
-
-        left -= 1
-        right += 1
 
 
 def find_all_palindrome_v2(chars: str) -> Generator:
@@ -404,7 +403,7 @@ answer:
 def count_words_no1(chars: str) -> Tuple[str, int]:
     chars = chars.lower()
 
-    cache = []  # list
+    cache = []
     for char in chars:
         if not char.isspace():
             cache.append((char, chars.count(char)))
@@ -489,7 +488,6 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
             """y_valueが存在する時"""
             if x_value < y_value:
                 x[:] = [i for i in x if i != x_key]
-
                 # これをリスト内表記化させた。
                 # x = []
                 # for i in x:
@@ -554,7 +552,7 @@ def list_to_int_plus1_part2(numbers: List[int]) -> int:
 
         i -= 1
 
-    return list_to_int_plus1_part1(numbers)
+    return list_to_int(numbers)
 
 
 def remove_zero(numbers: List[int]) -> None:
@@ -622,7 +620,7 @@ def validate_json(chars: str) -> bool:
     if stack:
         """
         最終的にstackの中は空リスト: [] じゃないといけない
-        pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
+        Pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
         """
         return False
 
@@ -642,10 +640,10 @@ def flatten(list_in_list):
 
 # 全ての順列を表示させる
 # from itertools import permutations
-#
+
 # for r in permutations([1, 2, 3]):
 #     print(r)
-#
+
 # これと同じ関数を自作
 def all_perms_v1(elements: List[int]) -> List[List[int]]:
     result = []
@@ -664,7 +662,7 @@ def all_perms_v2(elements: List[int]) -> List[List[int]]:
     if len(elements) <= 1:
         yield elements
 
-    for perms in all_perms_v1(elements[1:]):
+    for perms in all_perms_v2(elements[1:]):
         for i in range(len(elements)):
 
             # elements[0:1] だと リストで返ってくる
