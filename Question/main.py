@@ -395,8 +395,9 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
 
 """
 Count most appear str in the sentence.
-input = 'hello world, to all people in this world.
-answer: 
+input = 'hello world, to all people in this world.'
+
+>>> ('l', 7)
 """
 
 
