@@ -1,6 +1,8 @@
 import operator
-from typing import List, Tuple
+from typing import List, Tuple, Generator
 from collections import Counter
+import string
+import math
 
 
 # スネーク文字表示
@@ -23,12 +25,12 @@ def snake_print(numbers: str) -> List[List[str]]:
     
     return result
 
-    # return result
-    # 
-    # nums = [str(i) for _ in range(3) for i in range(0, 10)]
-    # nums = ''.join(nums)
-    # for line in snake_print(nums):
-    #     print(''.join(line))
+# return result
+#
+# nums = [str(i) for _ in range(3) for i in range(0, 10)]
+# nums = ''.join(nums)
+# for line in snake_print(nums):
+#     print(''.join(line))
 
 
 def snake_print2(chars: str, depth: int):
@@ -38,6 +40,9 @@ def snake_print2(chars: str, depth: int):
 
     def pos(i):
         return i + 1
+
+    # pos = lambda i: i + 1
+    # neg = lambda i: i + 1
 
     def neg(i):
         return i - 1
@@ -59,14 +64,13 @@ def snake_print2(chars: str, depth: int):
     return result
 
 
-    # import string
-    # alpha = [s for _ in range(2) for s in string.ascii_lowercase]
-    # strings = ''.join(alpha)
-    #
-    # for line in snake_print2(strings, 8):
-    #     print(''.join(line))
+# alpha = [s for _ in range(2) for s in string.ascii_lowercase]
+# strings = ''.join(alpha)
+#
+# for line in snake_print2(strings, 8):
+#     print(''.join(line))
 
-    
+
 # from itertools import permutations
 # for p in permutations([1, 2, 3]):
 #     print(p)
@@ -97,7 +101,6 @@ def all_perms_v2(elements: List[int]) -> Generator:
         for i in range(len(elements)):
             yield perms[:i] + elements[0:1] + perms[i:]
 
-            
             
 # 電話番号のメモニック
 NUM_ALPHABET = {
@@ -139,7 +142,6 @@ def phone_mnemonic(telephone_number: str):
 #         print(p)
 # 
 # >>> LOVEPYTHON
-
 
 
 # 素数判定
@@ -193,7 +195,6 @@ def is_prime_v4(number: int) -> bool:
     return True
 
 
-
 # すでにsortされている事を想定
 # 重複を削除
 #
@@ -222,7 +223,6 @@ def delete_duplicate_v2(numbers: List[int]) -> List[int]:
         i -= 1
 
     return numbers
-
 
 
 # 回文かどうか調べる
@@ -301,17 +301,16 @@ def find_all_palindrome_v2(chars: str) -> Generator:
     if len_chars == 1:
         yield chars
 
-    # aba パターン
-    # abba パターン
+    # aba 奇数パターン
+    # abba 偶数パターン
     for i in range(1, len_chars - 1):
         yield from find_palindrome_v2(chars, i - 1, i + 1)
         yield from find_palindrome_v2(chars, i, i + 1)
 
 
-
 # l = ['y', 'n', 'p', 't', 'o', 'h']
 # i = [1, 5, 0, 2, 4, 3]
-# 指定のinde通りに並び替え
+# 指定のindex通りに並び替え
 def order_list_by_index(chars: List[str], indexes: List[int]) -> str:
     i, len_indexes = 0, len(indexes)
 
@@ -328,7 +327,7 @@ def order_list_by_index(chars: List[str], indexes: List[int]) -> str:
 
 
 def order_list_by_index_v2(chars: List[str], indexes: List[int]) -> str:
-    tmp = [None] * len(chars)
+    tmp = [''] * len(chars)
 
     for i, index in enumerate(indexes):
         tmp[index] = chars[i]
@@ -336,11 +335,12 @@ def order_list_by_index_v2(chars: List[str], indexes: List[int]) -> str:
     return ''.join(tmp)
 
 
-
 """
 偶数奇数並び替え
 偶数先、奇数後
 """
+
+
 def even_first_odd_last(numbers: List[int]) -> List[int]:
     evens = []
     odds = []
@@ -367,7 +367,6 @@ def even_first_odd_last_v2(numbers: List[int]) -> List[int]:
             right -= 1
 
     return numbers
-
 
 
 """
@@ -531,11 +530,11 @@ def list_to_int_plus1_part1(numbers: List[int]) -> int:
         numbers[i - 1] += 1
 
         i -= 1
-    else:
-        """リストの先頭が10だった場合の処理"""
-        if numbers[0] == 10:
-            numbers[0] = 1
-            numbers.append(0)
+
+    """リストの先頭が10だった場合の処理"""
+    if numbers[0] == 10:
+        numbers[0] = 1
+        numbers.append(0)
 
     return list_to_int(numbers)
 
@@ -614,7 +613,6 @@ def validate_json(chars: str) -> bool:
             stack.append(lookup[char])
 
         elif char in lookup.values():
-            # pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
             if stack is None:
                 return False
 
@@ -622,13 +620,17 @@ def validate_json(chars: str) -> bool:
                 return False
 
     if stack:
-        """最終的にstackの中は空リスト: [] じゃないといけない"""
+        """
+        最終的にstackの中は空リスト: [] じゃないといけない
+        pythonのlistは、空であればFalse、中身が入ってればTrueを返す性質があります。
+        """
         return False
 
     return True
 
 
 # list_in_list = [1, 4, 6, [2, 4], [3, 4, [7, 3, 2], 3], 9]
+# >>> [1, 4, 6, 2, 4, 3, 4, 7, 3, 2, 3, 9]
 # リストの中のリストを全て平らに
 def flatten(list_in_list):
     for i in list_in_list:
@@ -645,7 +647,6 @@ def flatten(list_in_list):
 #     print(r)
 #
 # これと同じ関数を自作
-
 def all_perms_v1(elements: List[int]) -> List[List[int]]:
     result = []
 
@@ -665,6 +666,9 @@ def all_perms_v2(elements: List[int]) -> List[List[int]]:
 
     for perms in all_perms_v1(elements[1:]):
         for i in range(len(elements)):
+
+            # elements[0:1] だと リストで返ってくる
+            # リストの結合
             yield perms[:i] + elements[0:1] + perms[i:]
 
 
@@ -742,3 +746,41 @@ def is_palindrome(check_text: str) -> bool:
         end -= 1
 
     return True
+
+
+def find_palindrome(check_text: str, left: int, right: int) -> List[str]:
+    result = []
+    while 0 <= left and right <= len(check_text) - 1:
+        if check_text[left] != check_text[right]:
+            break
+
+        result.append(check_text[left:right])
+
+        left -= 1
+        right += 1
+
+    return result
+
+
+def find_palindrome2(check_text: str, left: int, right: int) -> List[str]:
+    while 0 <= left and right <= len(check_text) - 1:
+        if check_text[left] != check_text[right]:
+            break
+
+        yield check_text[left:right]
+
+        left -= 1
+        right += 1
+
+
+def find_all_palindrome(strings: str) -> Generator[str, None, None]:
+    len_strings = len(strings)
+    if not len_strings:
+        yield
+
+    if len_strings == 1:
+        yield strings
+
+    for i in range(1, len_strings - 1):
+        yield from find_palindrome(strings, i - 1, i + 1)
+        yield from find_palindrome(strings, i - 1, i)
