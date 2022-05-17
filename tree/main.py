@@ -9,8 +9,6 @@ class Node(object):
         self.right = None
 
 
-# 関数ver ------------------------------------------
-
 def insert(node: Node, value: int) -> Node:
     if node is None:
         return Node(value)
@@ -22,8 +20,11 @@ def insert(node: Node, value: int) -> Node:
     return node
 
 
-# left -> top -> right
 def inorder(node: Node):
+    """
+    left -> top -> right
+    :param node: バイナリーサーチノード
+    """
     if node:
         inorder(node.left)
         print(node.value)
@@ -44,10 +45,17 @@ def search(node: Node, target: int) -> bool:
         return search(node.left, target)
 
 
-def min_value(node: Node) -> Node:
+def get_minimum_node(node: Node) -> Node:
     current = node
     while current.left:
         current = current.left
+    return current
+
+
+def get_biggest_node(node: Node) -> Node:
+    current = node
+    while current.right:
+        current = current.right
     return current
 
 
@@ -67,7 +75,7 @@ def remove(node: Node, value: int) -> Optional:
         elif node.right is None:
             return node.left
 
-        temp = min_value(node.right)
+        temp = get_minimum_node(node.right)
         node.value = temp.value
         node.right = remove(node.right, temp.value)
     return node
@@ -94,9 +102,11 @@ class BinarySearchTree(object):
             return node
         _insert(self.root, value)
 
-    # inorder: left -> node -> rightの順に見ていく
-    # 小さい順に表示
     def inorder(self):
+        """
+        inorder: left -> node -> rightの順に見ていく
+        小さい順に表示
+        """
         def _inorder(node: Node):
             if node:
                 _inorder(node.left)
