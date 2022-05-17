@@ -141,6 +141,13 @@ class BinarySearchTree(object):
             current = current.left
         return current
 
+    @staticmethod
+    def get_biggest_node(node: Node) -> Node:
+        current = node
+        while current.right:
+            current = current.right
+        return current
+
     def remove(self, target: int) -> None:
         def _remove(node: Node, target: int) -> Optional:
             if node is None:
