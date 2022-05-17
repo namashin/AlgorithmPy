@@ -119,7 +119,6 @@ class LinkedList(object):
             return _reverse_recursive(current_node, previous_node)
 
         self.head = _reverse_recursive(self.head, None)
-        return
 
     def sort(self):
         if self.head is None:
@@ -219,58 +218,84 @@ class DoublyLinkedList(object):
             current = None
             return
 
-    def reverse_iterative(self) -> None:
-        previous = None
-        current = self.head
-        while current:
-            previous = current.prev
-            current.prev = current.next
-            current.next = previous
+    # 単方向リンクリストのリバースでも可
+    def reverse_iterative(self):
+        previous_node = None
+        current_node = self.head
 
-            # appendの時は while current.next:
-            # で次のnextがあるかどうか見ていた
-            # 今回はreverseなので、nextではなく
-            # prevがあるかを見ている。
-            current = current.prev   
+        while current_node:
+            next_node = current_node.next
+            current_node.next = previous_node
 
-        if previous:
-            self.head = previous.prev
+            previous_node = current_node
+            current_node = next_node
 
-    def reverse_recursive_1(self):
-        if self.head is None:
-            return
-        
-        def _reverse_recursive_1(current: Node):
-            prev = current.prev
-            current.prev = current.next
-            current.next = prev
+        self.head = previous_node
 
-            if current.prev is None:
-                return current
+    def reverse_recursive(self):
+        def _reverse_recursive(current_node: Node, previous_node: Optional[Node]):
+            if current_node is None:
+                return previous_node
 
-            return _reverse_recursive_1(current.prev)
+            next_node = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+            return _reverse_recursive(current_node, previous_node)
 
-        self.head = _reverse_recursive_1(self.head)
-        return
+        self.head = _reverse_recursive(self.head, None)
 
-    def reverse_recursive_2(self):
-        if self.head is None:
-            return
-        
-        def _reverse_recursive_2(current: Node):
-            previous = current.prev
-            current.prev = current.next
-            current.next = previous
-
-            current = current.prev
-
-            if current is None:
-                return previous.prev
-
-            return _reverse_recursive_2(current)
-
-        self.head = _reverse_recursive_2(self.head)
-        return
+    # def reverse_iterative(self) -> None:
+    #     previous = None
+    #     current = self.head
+    #     while current:
+    #         previous = current.prev
+    #         current.prev = current.next
+    #         current.next = previous
+    #
+    #         # appendの時は while current.next:
+    #         # で次のnextがあるかどうか見ていた
+    #         # 今回はreverseなので、nextではなく
+    #         # prevがあるかを見ている。
+    #         current = current.prev
+    #
+    #     if previous:
+    #         self.head = previous.prev
+    #
+    # def reverse_recursive_1(self):
+    #     if self.head is None:
+    #         return
+    #
+    #     def _reverse_recursive_1(current: Node):
+    #         prev = current.prev
+    #         current.prev = current.next
+    #         current.next = prev
+    #
+    #         if current.prev is None:
+    #             return current
+    #
+    #         return _reverse_recursive_1(current.prev)
+    #
+    #     self.head = _reverse_recursive_1(self.head)
+    #     return
+    #
+    # def reverse_recursive_2(self):
+    #     if self.head is None:
+    #         return
+    #
+    #     def _reverse_recursive_2(current: Node):
+    #         previous = current.prev
+    #         current.prev = current.next
+    #         current.next = previous
+    #
+    #         current = current.prev
+    #
+    #         if current is None:
+    #             return previous.prev
+    #
+    #         return _reverse_recursive_2(current)
+    #
+    #     self.head = _reverse_recursive_2(self.head)
 
     def sort(self):
         if self.head is None:
