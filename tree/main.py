@@ -68,7 +68,7 @@ def remove(node: Node, value: int) -> Optional:
     elif value < node.value:
         node.left = remove(node.left, value)
     else:
-        # node.value == valueの時
+        # ３パターン（子ノード無し、片方のみ、両方
         if node.left is None:
             return node.right
 
@@ -87,10 +87,6 @@ class BinarySearchTree(object):
         self.root = None
 
     def insert(self, value: int) -> None:
-        if self.root is None:
-            self.root = Node(value)
-            return
-
         def _insert(node: Node, value: int) -> Node:
             if node is None:
                 return Node(value)
@@ -100,7 +96,8 @@ class BinarySearchTree(object):
             elif value > node.value:
                 node.right = _insert(node.right, value)
             return node
-        _insert(self.root, value)
+
+        self.root = _insert(self.root, value)
 
     def inorder(self):
         def _inorder(node: Node):
@@ -116,7 +113,7 @@ class BinarySearchTree(object):
             yield node.value
             yield from self.inorder2(node.right)
 
-    def search(self, target: int):
+    def search(self, target: int) -> bool:
         def _search(node: Node, target: int) -> bool:
             if node is None:
                 return False
@@ -128,7 +125,8 @@ class BinarySearchTree(object):
             elif node.value < target:
                 return _search(node.right, target)
 
-        print(_search(self.root, target))
+        # print(_search(self.root, target))
+        return _search(self.root, target)
 
     @staticmethod
     def get_minimum_node(node: Node) -> Node:
@@ -164,4 +162,4 @@ class BinarySearchTree(object):
                     node.right = _remove(node.right, temp.value)
             return node
 
-        _remove(self.root, target)
+        self.root = _remove(self.root, target)

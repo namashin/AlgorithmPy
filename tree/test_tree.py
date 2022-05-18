@@ -59,21 +59,21 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(nodes.__next__(), 7)
         self.assertEqual(nodes.__next__(), 10)
 
-        # for i, node_value in enumerate(self.bst.inorder2(self.bst.root)):
-        #     if i == 0:
-        #         self.assertEqual(node_value, 1)
-        #     elif i == 1:
-        #         self.assertEqual(node_value, 3)
-        #     elif i == 2:
-        #         self.assertEqual(node_value, 5)
-        #     elif i == 3:
-        #         self.assertEqual(node_value, 6)
-        #     elif i == 4:
-        #         self.assertEqual(node_value, 7)
-        #     elif i == 5:
-        #         self.assertEqual(node_value, 10)
-        #     else:
-        #         self.fail()
+        for i, node_value in enumerate(self.bst.inorder2(self.bst.root)):
+            if i == 0:
+                self.assertEqual(node_value, 1)
+            elif i == 1:
+                self.assertEqual(node_value, 3)
+            elif i == 2:
+                self.assertEqual(node_value, 5)
+            elif i == 3:
+                self.assertEqual(node_value, 6)
+            elif i == 4:
+                self.assertEqual(node_value, 7)
+            elif i == 5:
+                self.assertEqual(node_value, 10)
+            else:
+                self.fail()
 
 
 if __name__ == '__main__':
