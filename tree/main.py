@@ -103,10 +103,6 @@ class BinarySearchTree(object):
         _insert(self.root, value)
 
     def inorder(self):
-        """
-        inorder: left -> node -> rightの順に見ていく
-        小さい順に表示
-        """
         def _inorder(node: Node):
             if node:
                 _inorder(node.left)
@@ -120,7 +116,7 @@ class BinarySearchTree(object):
             yield node.value
             yield from self.inorder2(node.right)
 
-    def search(self, target: int) -> bool:
+    def search(self, target: int):
         def _search(node: Node, target: int) -> bool:
             if node is None:
                 return False
@@ -132,7 +128,8 @@ class BinarySearchTree(object):
                 return _search(node.left, target)
             elif node.value < target:
                 return _search(node.right, target)
-        return _search(self.root, target)
+
+        print(_search(self.root, target))
 
     @staticmethod
     def get_minimum_node(node: Node) -> Node:
@@ -163,7 +160,7 @@ class BinarySearchTree(object):
                 elif target > node.value:
                     return node.left
 
-                temp = self.get_minimum_node(node.right)
+                temp = get_minimum_node(node.right)
                 node.value = temp.value
                 node.right = _remove(node.right, temp.value)
             return node
