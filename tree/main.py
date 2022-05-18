@@ -123,7 +123,6 @@ class BinarySearchTree(object):
 
             if node.value == target:
                 return True
-
             elif node.value > target:
                 return _search(node.left, target)
             elif node.value < target:
@@ -159,10 +158,10 @@ class BinarySearchTree(object):
                     return node.right
                 elif target > node.value:
                     return node.left
-
-                temp = get_minimum_node(node.right)
-                node.value = temp.value
-                node.right = _remove(node.right, temp.value)
+                else:
+                    temp = BinarySearchTree.get_minimum_node(node.right)
+                    node.value = temp.value
+                    node.right = _remove(node.right, temp.value)
             return node
 
         _remove(self.root, target)
