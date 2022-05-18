@@ -68,7 +68,7 @@ def remove(node: Node, value: int) -> Optional:
     elif value < node.value:
         node.left = remove(node.left, value)
     else:
-        # ３パターン（子ノード無し、片方のみ、両方
+        # ３パターン（子ノード無し、片方のみ、両方）
         if node.left is None:
             return node.right
 

@@ -24,8 +24,14 @@ class TestBinarySearchTree(unittest.TestCase):
         top_left_value = self.bst.root.left.value
         self.assertEqual(top_left_value, 1)
 
+        top_right_value = self.bst.root.right.value
+        self.assertEqual(top_right_value, 6)
+
         top_right_left_value = self.bst.root.right.left.value
         self.assertEqual(top_right_left_value, 5)
+
+        top_right_right_value = self.bst.root.right.right.value
+        self.assertEqual(top_right_right_value, 7)
 
     def test_search(self):
         is_there = self.bst.search(7)
@@ -49,6 +55,12 @@ class TestBinarySearchTree(unittest.TestCase):
         min_node = self.bst.get_minimum_node(node)
 
         self.assertEqual(min_node.value, 1)
+
+    def test_get_biggest_node(self):
+        node = self.bst.root
+        biggest_node = self.bst.get_biggest_node(node)
+
+        self.assertEqual(biggest_node.value, 10)
 
     def test_inorder2(self):
         nodes = self.bst.inorder2(self.bst.root)
