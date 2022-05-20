@@ -21,10 +21,6 @@ def insert(node: Node, value: int) -> Node:
 
 
 def inorder(node: Node):
-    """
-    left -> top -> right
-    :param node: バイナリーサーチノード
-    """
     if node:
         inorder(node.left)
         print(node.value)
@@ -68,7 +64,7 @@ def remove(node: Node, value: int) -> Optional:
     elif value < node.value:
         node.left = remove(node.left, value)
     else:
-        # ３パターン（子ノード無し、片方のみ、両方）
+        # ３パターン（子ノード無し、片方のみノード有り、両方ノード有り）
         if node.left is None:
             return node.right
 
@@ -87,14 +83,14 @@ class BinarySearchTree(object):
         self.root = None
 
     def insert(self, value: int) -> None:
-        def _insert(node: Node, value: int) -> Node:
+        def _insert(node: Node, _value: int) -> Node:
             if node is None:
                 return Node(value)
 
             if value < node.value:
-                node.left = _insert(node.left, value)
+                node.left = _insert(node.left, _value)
             elif value > node.value:
-                node.right = _insert(node.right, value)
+                node.right = _insert(node.right, _value)
             return node
 
         self.root = _insert(self.root, value)
@@ -113,7 +109,7 @@ class BinarySearchTree(object):
             yield node.value
             yield from self.inorder2(node.right)
 
-    def search(self, target: int) -> bool:
+    def search(self, search_target: int) -> bool:
         def _search(node: Node, target: int) -> bool:
             if node is None:
                 return False
@@ -126,7 +122,7 @@ class BinarySearchTree(object):
                 return _search(node.right, target)
 
         # print(_search(self.root, target))
-        return _search(self.root, target)
+        return _search(self.root, search_target)
 
     @staticmethod
     def get_minimum_node(node: Node) -> Node:
@@ -142,7 +138,7 @@ class BinarySearchTree(object):
             current = current.right
         return current
 
-    def remove(self, target: int) -> None:
+    def remove(self, remove_target: int) -> None:
         def _remove(node: Node, target: int) -> Optional:
             if node is None:
                 return node
@@ -162,4 +158,4 @@ class BinarySearchTree(object):
                     node.right = _remove(node.right, temp.value)
             return node
 
-        self.root = _remove(self.root, target)
+        self.root = _remove(self.root, remove_target)

@@ -33,6 +33,9 @@ class TestBinarySearchTree(unittest.TestCase):
         top_right_right_value = self.bst.root.right.right.value
         self.assertEqual(top_right_right_value, 7)
 
+        top_right_right_right_value = self.bst.root.right.right.right.value
+        self.assertEqual(top_right_right_right_value, 10)
+
     def test_search(self):
         is_there = self.bst.search(7)
         self.assertTrue(is_there)
