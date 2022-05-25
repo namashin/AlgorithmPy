@@ -57,12 +57,12 @@ def count_words_no3(chars: str) -> Tuple[str, int]:
 
 
 """
-x = [1, 2, 3, 4, 4, 5, 5, 6, 6, 10]
+x = [1, 2, 3, 4, 4, 5, 5, 6, 6, 10, 11]
 y = [2, 4, 6, 7, 8, 10, 10, 10]
 
 これが
 
-x = [1, 2, 3, 4, 4, 5, 5, 6, 6]
+x = [1, 2, 3, 4, 4, 5, 5, 6, 6, 11]
 y = [2, 7, 8, 10, 10, 10]
 
 """
@@ -109,5 +109,5 @@ def min_count_remove_no2(x: List[int], y: List[int]) -> None:
 
             elif x_value > y_value:
                 y[:] = [i for i in y if i != x_key]
-            elif x_value == y_value:
-                continue
+            # elif x_value == y_value:
+            #     continue

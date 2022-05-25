@@ -1,4 +1,5 @@
 from typing import Optional
+import heapq
 
 
 class Node(object):
@@ -159,3 +160,12 @@ class BinarySearchTree(object):
             return node
 
         self.root = _remove(self.root, remove_target)
+
+
+if __name__ == '__main__':
+    # heap の実装
+    a = [7, 5, 3, 2, 4, 8, 10, 1]
+    heapq.heapify(a)
+    heapq.heappush(a, 6)
+    heapq.heappop(a)
+    print(a)
