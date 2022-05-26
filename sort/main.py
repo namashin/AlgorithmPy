@@ -38,3 +38,28 @@ def insertion_sort(numbers: List[int]) -> List[int]:
         numbers[j+1] = temp
 
     return numbers
+
+
+def quick_sort(numbers: List[int]) -> List[int]:
+    def _quick_sort(_numbers: List[int], low: int, high: int) -> None:
+        if low < high:
+            partition_index = partition(_numbers, low, high)
+            _quick_sort(_numbers, low, partition_index - 1)
+            _quick_sort(_numbers, partition_index + 1, high)
+
+    _quick_sort(numbers, low=0, high=len(numbers)-1)
+
+    return numbers
+
+
+def partition(numbers: List[int], low: int, high: int) -> int:
+    i = low - 1
+    pivot = numbers[high]
+    for j in range(low, high):
+        if numbers[j] <= pivot:
+            i += 1
+            numbers[i], numbers[j] = numbers[j], numbers[i]
+
+    i += 1
+    numbers[high], numbers[i] = numbers[i], numbers[high]
+    return i
