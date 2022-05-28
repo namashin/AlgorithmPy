@@ -134,6 +134,19 @@ class LinkedList(object):
 
             current = current.next
         return
+    
+    def is_palindrome(self) -> bool:
+        if self.head is None:
+            return False
+
+        current = self.head
+        node_list = []
+        while current:
+            node_list.append(current.data)
+            current = current.next
+
+        return node_list == node_list[::-1]
+
 
 
 # 双方向リンクリスト用のノードクラス
