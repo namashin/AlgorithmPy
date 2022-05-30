@@ -43,6 +43,13 @@ class TestSorts(unittest.TestCase):
             self.assertLessEqual(prev, num)
             prev = num
 
+    def test_merge_sort(self):
+        main.merge_sort(self.nums)
+        prev = 0
+        for num in self.nums:
+            self.assertLessEqual(prev, num)
+            prev = num
+
 
 if __name__ == '__main__':
     unittest.main()
