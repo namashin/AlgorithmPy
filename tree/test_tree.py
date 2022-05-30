@@ -65,8 +65,11 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertEqual(biggest_node.value, 10)
 
-    def test_inorder2(self):
-        nodes = self.bst.inorder2(self.bst.root)
+    def test_validate_bst(self):
+        self.assertTrue(self.bst.validate_bst())
+
+    def test_inorder_generate(self):
+        nodes = self.bst.inorder_generate(self.bst.root)
         self.assertEqual(nodes.__next__(), 1)
         self.assertEqual(nodes.__next__(), 3)
         self.assertEqual(nodes.__next__(), 5)
@@ -74,21 +77,21 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(nodes.__next__(), 7)
         self.assertEqual(nodes.__next__(), 10)
 
-        for i, node_value in enumerate(self.bst.inorder2(self.bst.root)):
-            if i == 0:
-                self.assertEqual(node_value, 1)
-            elif i == 1:
-                self.assertEqual(node_value, 3)
-            elif i == 2:
-                self.assertEqual(node_value, 5)
-            elif i == 3:
-                self.assertEqual(node_value, 6)
-            elif i == 4:
-                self.assertEqual(node_value, 7)
-            elif i == 5:
-                self.assertEqual(node_value, 10)
-            else:
-                self.fail()
+        # for i, node_value in enumerate(self.bst.inorder_generate(self.bst.root)):
+        #     if i == 0:
+        #         self.assertEqual(node_value, 1)
+        #     elif i == 1:
+        #         self.assertEqual(node_value, 3)
+        #     elif i == 2:
+        #         self.assertEqual(node_value, 5)
+        #     elif i == 3:
+        #         self.assertEqual(node_value, 6)
+        #     elif i == 4:
+        #         self.assertEqual(node_value, 7)
+        #     elif i == 5:
+        #         self.assertEqual(node_value, 10)
+        #     else:
+        #         self.fail()
 
 
 if __name__ == '__main__':

@@ -104,11 +104,25 @@ class BinarySearchTree(object):
                 _inorder(node.right)
         _inorder(self.root)
 
-    def inorder2(self, node: Node):
+    def inorder_generate(self, node: Node):
         if node:
-            yield from self.inorder2(node.left)
+            yield from self.inorder_generate(node.left)
             yield node.value
-            yield from self.inorder2(node.right)
+            yield from self.inorder_generate(node.right)
+
+    def validate_bst(self) -> bool:
+        node_values = []
+        for data in self.inorder_generate(self.root):
+            node_values.append(data)
+
+        i = len(node_values) - 1
+        while 0 < i:
+            if node_values[i] < node_values[i - 1]:
+                return False
+
+            i -= 1
+
+        return True
 
     def search(self, search_target: int) -> bool:
         def _search(node: Node, target: int) -> bool:
