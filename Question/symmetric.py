@@ -7,12 +7,13 @@ def find_symmetric(pairs: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
     for pair in pairs:
         first, second = pair[0], pair[1]
 
-        value = cache.get(second)
+        value = cache.get(second, None)
         if value is None:
             cache[first] = second
 
-        if value == first:
-            yield pair
+        else:
+            value == first:
+                yield pair
 
 
 if __name__ == '__main__':
