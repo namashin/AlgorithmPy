@@ -17,6 +17,10 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_max_depth(self):
+        depth = self.bst.max_depth()
+        self.assertEqual(depth, 4)
+
     def test_insert(self):
         top_value = self.bst.root.value
         self.assertEqual(top_value, 3)
