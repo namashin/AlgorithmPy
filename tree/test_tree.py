@@ -94,5 +94,60 @@ class TestBinarySearchTree(unittest.TestCase):
         #         self.fail()
 
 
+class TestMiniHeap(unittest.TestCase):
+    def setUp(self) -> None:
+        self.min_heap = main.MiniHeap()
+
+    def tearDown(self) -> None:
+        pass
+
+    def test_push(self):
+        self.min_heap.push(10)
+        self.min_heap.push(8)
+        self.min_heap.push(4)
+        self.min_heap.push(7)
+        self.min_heap.push(3)
+        self.min_heap.push(1)
+
+        for i, num in enumerate(self.min_heap.heap):
+            if i == 1:
+                self.assertEqual(self.min_heap.heap[1], 1)
+            elif i == 2:
+                self.assertEqual(self.min_heap.heap[2], 4)
+            elif i == 3:
+                self.assertEqual(self.min_heap.heap[3], 3)
+            elif i == 4:
+                self.assertEqual(self.min_heap.heap[4], 10)
+            elif i == 5:
+                self.assertEqual(self.min_heap.heap[5], 7)
+            elif i == 6:
+                self.assertEqual(self.min_heap.heap[6], 8)
+
+    def test_pop(self):
+        # Init
+        self.min_heap.push(10)
+        self.min_heap.push(8)
+        self.min_heap.push(4)
+        self.min_heap.push(7)
+        self.min_heap.push(3)
+        self.min_heap.push(1)
+
+        # Execute
+        self.min_heap.pop()
+
+        # Validation
+        for i, num in enumerate(self.min_heap.heap):
+            if i == 1:
+                self.assertEqual(self.min_heap.heap[1], 3)
+            elif i == 2:
+                self.assertEqual(self.min_heap.heap[2], 4)
+            elif i == 3:
+                self.assertEqual(self.min_heap.heap[3], 8)
+            elif i == 4:
+                self.assertEqual(self.min_heap.heap[4], 10)
+            elif i == 5:
+                self.assertEqual(self.min_heap.heap[5], 7)
+
+
 if __name__ == '__main__':
     unittest.main()
