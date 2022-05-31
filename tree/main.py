@@ -98,6 +98,9 @@ class BinarySearchTree(object):
         self.root = _insert(self.root, value)
 
     def max_depth(self) -> int:
+        if self.root is None:
+            return -1
+
         def _max_depth(root: Optional[Node]) -> int:
             if not root:
                 return 0
