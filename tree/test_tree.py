@@ -21,6 +21,10 @@ class TestBinarySearchTree(unittest.TestCase):
         depth = self.bst.max_depth()
         self.assertEqual(depth, 4)
 
+    def test_size_recursive(self):
+        size = self.bst.size_recursive()
+        self.assertEqual(size, 6)
+
     def test_insert(self):
         top_value = self.bst.root.value
         self.assertEqual(top_value, 3)

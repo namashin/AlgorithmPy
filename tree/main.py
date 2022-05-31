@@ -110,6 +110,17 @@ class BinarySearchTree(object):
 
         return _max_depth(self.root)
 
+    def size_recursive(self) -> int:
+        if self.root is None:
+            return -1
+
+        def _size(node: Node) -> int:
+            if node is None:
+                return 0
+            return _size(node.left) + _size(node.right) + 1
+
+        return _size(self.root)
+
     def inorder(self):
         def _inorder(node: Node):
             if node:
