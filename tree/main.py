@@ -80,7 +80,6 @@ def remove(node: Node, value: int) -> Optional:
 
 
 class BinarySearchTree(object):
-
     def __init__(self):
         self.root = None
 
@@ -97,9 +96,9 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
-    def max_depth(self) -> int:
+    def max_depth(self) -> Optional[int]:
         if self.root is None:
-            return -1
+            return
 
         def _max_depth(root: Optional[Node]) -> int:
             if not root:
@@ -134,6 +133,12 @@ class BinarySearchTree(object):
             yield from self.inorder_generate(node.left)
             yield node.value
             yield from self.inorder_generate(node.right)
+
+    def preorder_generate(self, root):
+        if root:
+            yield root.value
+            yield from self.preorder_generate(root.left)
+            yield from self.preorder_generate(root.right)
 
     def validate_bst(self) -> bool:
         node_values = []

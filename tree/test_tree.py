@@ -76,6 +76,15 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_validate_bst(self):
         self.assertTrue(self.bst.validate_bst())
 
+    def test_preorder_generate(self):
+        want = [3, 1, 6, 5, 7, 10]
+
+        result = []
+        for data in self.bst.preorder_generate(self.bst.root):
+            result.append(data)
+
+        self.assertEqual(want, result)
+
     def test_inorder_generate(self):
         nodes = self.bst.inorder_generate(self.bst.root)
         self.assertEqual(nodes.__next__(), 1)
