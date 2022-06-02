@@ -31,6 +31,26 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(5, self.bst.root.left.right.value)
         self.assertEqual(10, self.bst.root.left.left.left.value)
 
+    def test_invert_tree_stack(self):
+        self.bst.invert_tree_stack()
+
+        self.assertEqual(3, self.bst.root.value)
+        self.assertEqual(1, self.bst.root.right.value)
+        self.assertEqual(6, self.bst.root.left.value)
+        self.assertEqual(7, self.bst.root.left.left.value)
+        self.assertEqual(5, self.bst.root.left.right.value)
+        self.assertEqual(10, self.bst.root.left.left.left.value)
+
+    def test_invert_queue(self):
+        self.bst.invert_tree_queue()
+
+        self.assertEqual(3, self.bst.root.value)
+        self.assertEqual(1, self.bst.root.right.value)
+        self.assertEqual(6, self.bst.root.left.value)
+        self.assertEqual(7, self.bst.root.left.left.value)
+        self.assertEqual(5, self.bst.root.left.right.value)
+        self.assertEqual(10, self.bst.root.left.left.left.value)
+
     def test_size_recursive(self):
         size = self.bst.size_recursive()
         self.assertEqual(size, 6)

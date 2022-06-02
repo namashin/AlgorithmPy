@@ -1,3 +1,4 @@
+import collections
 from typing import Optional
 import heapq
 import sys
@@ -83,14 +84,6 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
-    def invert_tree(self):
-        def _invert_tree(root: Node):
-            if root:
-                root.left, root.right = _invert_tree(root.right), _invert_tree(root.left)
-                return root
-
-        _invert_tree(self.root)
-
     def insert(self, value: int) -> None:
         def _insert(node: Node, _value: int) -> Node:
             if node is None:
@@ -103,6 +96,41 @@ class BinarySearchTree(object):
             return node
 
         self.root = _insert(self.root, value)
+
+    def invert_tree(self):
+        def _invert_tree(root: Node):
+            if root:
+                root.left, root.right = _invert_tree(root.right), _invert_tree(root.left)
+                return root
+
+        _invert_tree(self.root)
+
+    def invert_tree_stack(self):
+        def _invert_tree_stack(root: Node) -> None:
+            stack = [root]
+
+            while stack:
+                node = stack.pop()
+                if node:
+                    node.left, node.right = node.right, node.left
+                    stack.append(node.left)
+                    stack.append(node.right)
+
+        _invert_tree_stack(self.root)
+
+    def invert_tree_queue(self):
+        def _invert_tree_queue(root: Node):
+            queue = collections.deque([root])
+
+            while queue:
+                node = queue.popleft()
+
+                if node:
+                    node.left, node.right = node.right, node.left
+                    queue.append(node.left)
+                    queue.append(node.right)
+
+        _invert_tree_queue(self.root)
 
     def max_depth(self) -> Optional[int]:
         if self.root is None:
@@ -117,9 +145,9 @@ class BinarySearchTree(object):
 
         return _max_depth(self.root)
 
-    def size_recursive(self) -> int:
+    def size_recursive(self) -> Optional[int]:
         if self.root is None:
-            return -1
+            return
 
         def _size(node: Node) -> int:
             if node is None:
