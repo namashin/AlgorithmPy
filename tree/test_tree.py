@@ -21,6 +21,16 @@ class TestBinarySearchTree(unittest.TestCase):
         depth = self.bst.max_depth()
         self.assertEqual(depth, 4)
 
+    def test_invert_tree(self):
+        self.bst.invert_tree()
+
+        self.assertEqual(3, self.bst.root.value)
+        self.assertEqual(1, self.bst.root.right.value)
+        self.assertEqual(6, self.bst.root.left.value)
+        self.assertEqual(7, self.bst.root.left.left.value)
+        self.assertEqual(5, self.bst.root.left.right.value)
+        self.assertEqual(10, self.bst.root.left.left.left.value)
+
     def test_size_recursive(self):
         size = self.bst.size_recursive()
         self.assertEqual(size, 6)
@@ -79,11 +89,19 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_preorder_generate(self):
         want = [3, 1, 6, 5, 7, 10]
 
-        result = []
+        got = []
         for data in self.bst.preorder_generate(self.bst.root):
-            result.append(data)
+            got.append(data)
 
-        self.assertEqual(want, result)
+        self.assertEqual(want, got)
+
+    def test_post_order_generate(self):
+        want = [10, 7, 5, 6, 1, 3]
+
+        got = []
+        for data in self.bst.postorder_generate(self.bst.root):
+            got.append(data)
+        self.assertEqual(want, got)
 
     def test_inorder_generate(self):
         nodes = self.bst.inorder_generate(self.bst.root)

@@ -83,6 +83,14 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
+    def invert_tree(self):
+        def _invert_tree(root: Node):
+            if root:
+                root.left, root.right = _invert_tree(root.right), _invert_tree(root.left)
+                return root
+
+        _invert_tree(self.root)
+
     def insert(self, value: int) -> None:
         def _insert(node: Node, _value: int) -> Node:
             if node is None:
@@ -128,17 +136,23 @@ class BinarySearchTree(object):
                 _inorder(node.right)
         _inorder(self.root)
 
-    def inorder_generate(self, node: Node):
-        if node:
-            yield from self.inorder_generate(node.left)
-            yield node.value
-            yield from self.inorder_generate(node.right)
+    def inorder_generate(self, root: Node):
+        if root:
+            yield from self.inorder_generate(root.left)
+            yield root.value
+            yield from self.inorder_generate(root.right)
 
     def preorder_generate(self, root):
         if root:
             yield root.value
             yield from self.preorder_generate(root.left)
             yield from self.preorder_generate(root.right)
+
+    def postorder_generate(self, root: Node):
+        if root:
+            yield from self.postorder_generate(root.right)
+            yield from self.postorder_generate(root.left)
+            yield root.value
 
     def validate_bst(self) -> bool:
         node_values = []
@@ -166,7 +180,6 @@ class BinarySearchTree(object):
             elif node.value < target:
                 return _search(node.right, target)
 
-        # print(_search(self.root, target))
         return _search(self.root, search_target)
 
     @staticmethod
