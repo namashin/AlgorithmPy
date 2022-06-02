@@ -17,6 +17,10 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_path_sum(self):
+        is_there = self.bst.path_sum(26)
+        self.assertTrue(is_there)
+
     def test_max_depth(self):
         depth = self.bst.max_depth()
         self.assertEqual(depth, 4)

@@ -97,6 +97,20 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
+    def path_sum(self, target_sum: int) -> bool:
+        def _path_sum(root: Node, target_sum: int) -> bool:
+            if not root:
+                return False
+
+            if (not root.left) and (not root.right) and (root.value == target_sum):
+                return True
+
+            target_sum -= root.value
+
+            return _path_sum(root.left, target_sum) or _path_sum(root.right, target_sum)
+
+        return _path_sum(self.root, target_sum)
+
     def invert_tree(self):
         def _invert_tree(root: Node):
             if root:
