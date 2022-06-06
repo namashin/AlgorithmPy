@@ -17,11 +17,17 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_find_all_tree_paths(self):
+        god = self.bst.find_all_tree_paths()
+        want = [[3, 1], [3, 6, 5], [3, 6, 7, 10]]
+
+        self.assertEqual(god, want)
+
     def test_path_sum(self):
         is_there = self.bst.path_sum(26)
         self.assertTrue(is_there)
 
-    def test_all_sum(self):
+    def test_all_specific_sum(self):
         # Init
         self.bst.insert(9)
         self.bst.insert(8)
@@ -29,7 +35,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
         # Execution
         want = [[3, 6, 7, 10, 9, 8], [3, 6, 7, 10, 17]]
-        got = self.bst.path_all_sum(43)
+        got = self.bst.path_all_specific_sum(43)
 
         self.assertEqual(want, got)
 
