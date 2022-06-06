@@ -21,6 +21,18 @@ class TestBinarySearchTree(unittest.TestCase):
         is_there = self.bst.path_sum(26)
         self.assertTrue(is_there)
 
+    def test_all_sum(self):
+        # Init
+        self.bst.insert(9)
+        self.bst.insert(8)
+        self.bst.insert(17)
+
+        # Execution
+        want = [[3, 6, 7, 10, 9, 8], [3, 6, 7, 10, 17]]
+        got = self.bst.path_all_sum(43)
+
+        self.assertEqual(want, got)
+
     def test_max_depth(self):
         depth = self.bst.max_depth()
         self.assertEqual(depth, 4)

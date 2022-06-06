@@ -1,5 +1,5 @@
 import collections
-from typing import Optional
+from typing import Optional, List
 import heapq
 import sys
 
@@ -110,6 +110,21 @@ class BinarySearchTree(object):
             return _path_sum(root.left, target_sum) or _path_sum(root.right, target_sum)
 
         return _path_sum(self.root, target_sum)
+
+    def path_all_sum(self, target_sum: int) -> List[List[int]]:
+        def _path_all_sum(root: Node, _target_sum: int) -> List[List[int]]:
+            if not root:
+                return []
+
+            if (not root.left) and (not root.right) and _target_sum == root.value:
+                return [[root.value]]
+
+            temp = _path_all_sum(root.left, _target_sum - root.value) \
+                   + _path_all_sum(root.right, _target_sum - root.value)
+
+            return [[root.value] + i for i in temp]
+
+        return _path_all_sum(self.root, target_sum)
 
     def invert_tree(self):
         def _invert_tree(root: Node):
