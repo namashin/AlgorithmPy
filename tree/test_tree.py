@@ -35,7 +35,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
         # Execution
         want = [[3, 6, 7, 10, 9, 8], [3, 6, 7, 10, 17]]
-        got = self.bst.path_all_specific_sum(43)
+        got = self.bst.specific_tree_paths(43)
 
         self.assertEqual(want, got)
 

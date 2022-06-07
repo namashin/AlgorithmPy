@@ -111,20 +111,19 @@ class BinarySearchTree(object):
 
         return _path_sum(self.root, target_sum)
 
-    def path_all_specific_sum(self, target_sum: int) -> List[List[int]]:
-        def _path_all_sum(root: Node, _target_sum: int) -> List[List[int]]:
+    def specific_tree_paths(self, target_sum: int) -> List[List[int]]:
+        def _specific_tree_paths(root: Node, _target_sum: int) -> List[List[int]]:
             if not root:
                 return []
 
             if (not root.left) and (not root.right) and _target_sum == root.value:
                 return [[root.value]]
 
-            temp = _path_all_sum(root.left, _target_sum - root.value) \
-                   + _path_all_sum(root.right, _target_sum - root.value)
+            temp = _specific_tree_paths(root.left, _target_sum - root.value) + _specific_tree_paths(root.right, _target_sum - root.value)
 
             return [[root.value] + i for i in temp]
 
-        return _path_all_sum(self.root, target_sum)
+        return _specific_tree_paths(self.root, target_sum)
 
     def find_all_tree_paths(self):
         def _find_all_tree_paths(root: Node) -> List[List[int]]:
@@ -141,7 +140,7 @@ class BinarySearchTree(object):
         return _find_all_tree_paths(self.root)
 
     def invert_tree(self):
-        def _invert_tree(root: Node):
+        def _invert_tree(root: Node) -> Node:
             if root:
                 root.left, root.right = _invert_tree(root.right), _invert_tree(root.left)
                 return root

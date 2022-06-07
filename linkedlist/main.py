@@ -39,26 +39,7 @@ class LinkedList(object):
             print(all_nodes.data)
             all_nodes = all_nodes.next
 
-    def remove(self, data: Any):
-        current_node = self.head
-        if current_node and current_node.data == data:
-            # 先頭が削除したいdataだった時
-            self.head = current_node.next
-            current_node = None
-            return
-
-        previous_node = None
-        while current_node and current_node.data != data:
-            previous_node = current_node
-            current_node = current_node.next
-
-        if current_node is None:
-            return
-
-        previous_node.next = current_node.next
-        current_node = None
-
-    def remove2(self, target: int) -> None:
+    def remove(self, target: Any) -> None:
         if self.head is None:
             return
 
@@ -121,9 +102,6 @@ class LinkedList(object):
         self.head = _reverse_recursive(self.head, None)
 
     def sort(self):
-        if self.head is None:
-            return
-
         current = self.head
         while current:
             next_node = current.next
@@ -133,8 +111,7 @@ class LinkedList(object):
                 next_node = next_node.next
 
             current = current.next
-        return
-    
+
     def is_palindrome(self) -> bool:
         if self.head is None:
             return False
@@ -146,7 +123,6 @@ class LinkedList(object):
             current = current.next
 
         return node_list == node_list[::-1]
-
 
 
 # 双方向リンクリスト用のノードクラス
@@ -231,7 +207,7 @@ class DoublyLinkedList(object):
             current = None
             return
 
-    # 単方向リンクリストのリバースでも可
+    # 単方向リンクリストのリバース方法でも可
     def reverse_iterative(self):
         previous_node = None
         current_node = self.head
@@ -258,62 +234,7 @@ class DoublyLinkedList(object):
 
         self.head = _reverse_recursive(self.head, None)
 
-    # def reverse_iterative(self) -> None:
-    #     previous = None
-    #     current = self.head
-    #     while current:
-    #         previous = current.prev
-    #         current.prev = current.next
-    #         current.next = previous
-    #
-    #         # appendの時は while current.next:
-    #         # で次のnextがあるかどうか見ていた
-    #         # 今回はreverseなので、nextではなく
-    #         # prevがあるかを見ている。
-    #         current = current.prev
-    #
-    #     if previous:
-    #         self.head = previous.prev
-    #
-    # def reverse_recursive_1(self):
-    #     if self.head is None:
-    #         return
-    #
-    #     def _reverse_recursive_1(current: Node):
-    #         prev = current.prev
-    #         current.prev = current.next
-    #         current.next = prev
-    #
-    #         if current.prev is None:
-    #             return current
-    #
-    #         return _reverse_recursive_1(current.prev)
-    #
-    #     self.head = _reverse_recursive_1(self.head)
-    #     return
-    #
-    # def reverse_recursive_2(self):
-    #     if self.head is None:
-    #         return
-    #
-    #     def _reverse_recursive_2(current: Node):
-    #         previous = current.prev
-    #         current.prev = current.next
-    #         current.next = previous
-    #
-    #         current = current.prev
-    #
-    #         if current is None:
-    #             return previous.prev
-    #
-    #         return _reverse_recursive_2(current)
-    #
-    #     self.head = _reverse_recursive_2(self.head)
-
     def sort(self):
-        if self.head is None:
-            return
-
         current = self.head
         while current:
             next_node = current.next
@@ -323,4 +244,3 @@ class DoublyLinkedList(object):
                 next_node = next_node.next
 
             current = current.next
-        return
