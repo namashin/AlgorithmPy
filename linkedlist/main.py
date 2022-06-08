@@ -39,7 +39,7 @@ class LinkedList(object):
             print(all_nodes.data)
             all_nodes = all_nodes.next
 
-    def remove(self, target: Any) -> None:
+    def remove_element(self, target: Any) -> None:
         if self.head is None:
             return
 
@@ -70,6 +70,35 @@ class LinkedList(object):
             previous.next = current.next
             current = None
             return
+
+    def remove_elements(self, target):
+        """
+        片方向リンクリストの場合、class Node（ノード）に　prev　が無いので、
+        変数: previousが必要
+        """
+        if not self.head:
+            return
+
+        def _remove_elements(head: Node, _target: Any) -> Optional[Node]:
+            previous = None
+            current = head
+
+            while current:
+                if current.data == _target:
+                    if previous:
+                        previous.next = current.next
+                    else:
+                        head = current.next
+
+                    current = current.next
+
+                else:
+                    previous = current
+                    current = current.next
+
+            return head
+
+        self.head = _remove_elements(self.head, target)
 
     @staticmethod
     def get_next_node(node: Node) -> Any:
@@ -168,7 +197,7 @@ class DoublyLinkedList(object):
         new_node.next = self.head
         self.head = new_node
 
-    def remove(self, target: Any):
+    def remove_element(self, target: Any):
         current = self.head
 
         if current and current.data == target:
@@ -192,12 +221,11 @@ class DoublyLinkedList(object):
         if current is None:
             return
 
-        # targetが見つかって、その次がNoneの時
+        # targetが見つかって、その次がNoneの時（最後尾）
         if current.next is None:
             prev = current.prev
             prev.next = None
             current = None
-            return
         else:
             # targetが見つかって、その次に何か入ってる場合
             next = current.next
@@ -205,7 +233,22 @@ class DoublyLinkedList(object):
             prev.next = next
             next.prev = prev
             current = None
-            return
+
+    def remove_elements(self, target: Any):
+        current = self.head
+
+        while current:
+            if current.data == target:
+                if current.prev:
+                    current.prev.next = current.next
+                else:
+                    # headの一番先頭が削除する値の時
+                    self.head = current.next
+
+                current = current.next
+
+            else:
+                current = current.next
 
     # 単方向リンクリストのリバース方法でも可
     def reverse_iterative(self):
