@@ -17,6 +17,24 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_sum_of_left_leaves(self):
+        want = 6
+        got = self.bst.sum_of_left_leaves(self.bst.root)
+
+        self.assertEqual(want, got)
+
+    def test_sum_of_left_leaves_stack(self):
+        want = 6
+        got = self.bst.sum_of_left_leaves_stack()
+
+        self.assertEqual(want, got)
+
+    def test_sum_of_left_leaves_queue(self):
+        want = 6
+        got = self.bst.sum_of_left_leaves_queue()
+
+        self.assertEqual(want, got)
+
     def test_find_all_tree_paths(self):
         god = self.bst.find_all_tree_paths()
         want = [[3, 1], [3, 6, 5], [3, 6, 7, 10]]

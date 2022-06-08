@@ -2,6 +2,7 @@ import collections
 from typing import Optional, List
 import heapq
 import sys
+from collections import deque
 
 
 class Node(object):
@@ -84,6 +85,8 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
+        self.total = 0
+
     def insert(self, value: int) -> None:
         def _insert(node: Node, _value: int) -> Node:
             if node is None:
@@ -97,17 +100,68 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
+    def sum_of_left_leaves(self, root: Node) -> Optional[int]:
+        if not root:
+            return
+
+        if root.left and (not root.left.left) and (not root.left.right):
+            self.total += root.left.value
+
+        self.sum_of_left_leaves(root.left)
+        self.sum_of_left_leaves(root.right)
+
+        return self.total
+
+    def sum_of_left_leaves_stack(self) -> int:
+        original_root = self.root
+
+        stack = [original_root]
+        total = 0
+
+        while stack:
+            root = stack.pop()
+
+            if root.left and (not root.left.left) and (not root.left.right):
+                total += root.left.value
+
+            if root.left:
+                stack.append(root.left)
+
+            if root.right:
+                stack.append(root.right)
+
+        return total
+
+    def sum_of_left_leaves_queue(self):
+        original_root = self.root
+        queue = deque([original_root])
+        total = 0
+
+        while queue:
+            root = queue.popleft()
+
+            if root.left and (not root.left.left) and (not root.left.right):
+                total += root.left.value
+
+            if root.left:
+                queue.append(root.left)
+
+            if root.right:
+                queue.append(root.right)
+
+        return total
+
     def path_sum(self, target_sum: int) -> bool:
-        def _path_sum(root: Node, target_sum: int) -> bool:
+        def _path_sum(root: Node, _target_sum: int) -> bool:
             if not root:
                 return False
 
-            if (not root.left) and (not root.right) and (root.value == target_sum):
+            if (not root.left) and (not root.right) and (root.value == _target_sum):
                 return True
 
-            target_sum -= root.value
+            _target_sum -= root.value
 
-            return _path_sum(root.left, target_sum) or _path_sum(root.right, target_sum)
+            return _path_sum(root.left, _target_sum) or _path_sum(root.right, _target_sum)
 
         return _path_sum(self.root, target_sum)
 
