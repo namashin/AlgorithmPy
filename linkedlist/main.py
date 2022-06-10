@@ -197,7 +197,13 @@ class DoublyLinkedList(object):
         new_node.next = self.head
         self.head = new_node
 
-    def remove_element(self, target: Any):
+    def remove_element(self, target: Any) -> None:
+        """
+        最初のtargetのみ削除
+
+        :param target: 削除する値
+        :return:
+        """
         current = self.head
 
         if current and current.data == target:
@@ -234,13 +240,21 @@ class DoublyLinkedList(object):
             next.prev = prev
             current = None
 
-    def remove_elements(self, target: Any):
+    def remove_elements(self, target: Any) -> None:
+        """
+        全てのtarget値を削除
+
+        :param target: 削除する値
+        :return:
+        """
+
         current = self.head
+        previous = None
 
         while current:
             if current.data == target:
-                if current.prev:
-                    current.prev.next = current.next
+                if previous:
+                    previous.next = current.next
                 else:
                     # headの一番先頭が削除する値の時
                     self.head = current.next
@@ -248,6 +262,7 @@ class DoublyLinkedList(object):
                 current = current.next
 
             else:
+                previous = current
                 current = current.next
 
     # 単方向リンクリストのリバース方法でも可

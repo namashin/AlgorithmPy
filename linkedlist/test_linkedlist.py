@@ -43,6 +43,10 @@ class TestLinkedList(unittest.TestCase):
         self.linked_list.append("Test3")
         self.linked_list.append("Test4")
         self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
+
+        self.linked_list.append("Test5")
 
         # Execution
         self.linked_list.remove_elements("Test4")
@@ -51,6 +55,7 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual("Test1", self.linked_list.head.data)
         self.assertEqual("Test2", self.linked_list.head.next.data)
         self.assertEqual("Test3", self.linked_list.head.next.next.data)
+        self.assertEqual("Test5", self.linked_list.head.next.next.next.data)
 
     def test_reverse_iterative(self):
         self.linked_list.append("Test1")
@@ -121,12 +126,16 @@ class TestDoublyLinkedList(unittest.TestCase):
     def test_remove_elements(self):
         # Init
         self.doubly_linked_list.append("Test4")
+        self.doubly_linked_list.append("Test4")
         self.doubly_linked_list.append("Test1")
         self.doubly_linked_list.append("Test4")
         self.doubly_linked_list.append("Test2")
         self.doubly_linked_list.append("Test3")
         self.doubly_linked_list.append("Test4")
         self.doubly_linked_list.append("Test4")
+        self.doubly_linked_list.append("Test4")
+        self.doubly_linked_list.append("Test4")
+        self.doubly_linked_list.append("Test5")
 
         # Execution
         self.doubly_linked_list.remove_elements("Test4")
@@ -138,6 +147,7 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.assertEqual("Test1", self.doubly_linked_list.head.next.next.next.data)
         self.assertEqual("Test2", self.doubly_linked_list.head.next.next.next.next.data)
         self.assertEqual("Test3", self.doubly_linked_list.head.next.next.next.next.next.data)
+        self.assertEqual("Test5", self.doubly_linked_list.head.next.next.next.next.next.next.data)
 
     def test_reverse_iterative(self):
         self.doubly_linked_list.reverse_iterative()
