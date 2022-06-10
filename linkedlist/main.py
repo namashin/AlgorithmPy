@@ -26,6 +26,30 @@ class LinkedList(object):
             last_node = last_node.next
         last_node.next = new_node
 
+    def merge_two_linklist(self, list1: Node, list2: Node) -> Node:
+        result = LinkedList()
+
+        current1 = list1
+        current2 = list2
+
+        while current1 and current2:
+            if current1.data < current2.data:
+                result.append(current1.data)
+                current1 = current1.next
+            else:
+                result.append(current2.data)
+                current2 = current2.next
+
+        while current1:
+            result.append(current1.data)
+            current1 = current1.next
+
+        while current2:
+            result.append(current2.data)
+            current2 = current2.next
+
+        return result.head
+
     def insert(self, data: Any):
         new_node = Node(data)
 
@@ -180,6 +204,17 @@ class DoublyLinkedList(object):
         current.next = new_node
         new_node.prev = current
 
+    def size(self) -> int:
+        if self.head is None:
+            return 0
+
+        size = 0
+        current = self.head
+        while current:
+            size += 1
+            current = current.next
+        return size
+
     def print(self):
         current = self.head
         while current:
@@ -196,6 +231,36 @@ class DoublyLinkedList(object):
         self.head.prev = new_node
         new_node.next = self.head
         self.head = new_node
+
+    def remove_nth_node_from_head(self, n: int) -> None:
+        if self.head is None:
+            return
+        elif self.size() < n:
+            return
+
+        current = self.head
+        previous = None
+        for _ in range(1, n):
+            previous = current
+            current = current.next
+
+        if previous:
+            if current.next:
+                # 削除する値の次にまだ何か入っている場合
+                previous = current.prev
+                next = current.next
+                previous.next = next
+                next.prev = previous
+                current = None
+            else:
+                # 最後尾を削除する場合
+                previous = current.prev
+                previous.next = None
+                current = None
+
+        else:
+            # 一番初めを削除する場合 (n = 1)
+            self.head = current.next
 
     def remove_element(self, target: Any) -> None:
         """
