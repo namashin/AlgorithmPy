@@ -173,7 +173,8 @@ class BinarySearchTree(object):
             if (not root.left) and (not root.right) and _target_sum == root.value:
                 return [[root.value]]
 
-            temp = _specific_tree_paths(root.left, _target_sum - root.value) + _specific_tree_paths(root.right, _target_sum - root.value)
+            temp = _specific_tree_paths(root.left, _target_sum - root.value) \
+                   + _specific_tree_paths(root.right, _target_sum - root.value)
 
             return [[root.value] + i for i in temp]
 
@@ -341,6 +342,30 @@ class BinarySearchTree(object):
             return node
 
         self.root = _remove(self.root, remove_target)
+
+    def level_order(self) -> List[List[int]]:
+        current = self.root
+
+        if current is None:
+            return []
+
+        queue, result = deque([current]), []
+
+        while queue:
+            current_layer, size = [], len(queue)
+            for i in range(size):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+
+                if node.right:
+                    queue.append(node.right)
+
+                current_layer.append(node.value)
+
+            result.append(current_layer)
+
+        return result
 
 
 class MiniHeap(object):
