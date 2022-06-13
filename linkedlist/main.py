@@ -177,6 +177,23 @@ class LinkedList(object):
 
         return node_list == node_list[::-1]
 
+    def remove_nth_node_from_head(self, n: int):
+        current = self.head
+        previous = None
+
+        for _ in range(1, n):
+            previous = current
+            current = current.next
+
+        if previous:
+            if current.next:
+                previous.next = current.next
+            else:
+                previous.next = None
+                current = None
+        else:
+            self.head = current.next
+
 
 # 双方向リンクリスト用のノードクラス
 class Node(object):
@@ -205,9 +222,6 @@ class DoublyLinkedList(object):
         new_node.prev = current
 
     def size(self) -> int:
-        if self.head is None:
-            return 0
-
         size = 0
         current = self.head
         while current:
@@ -367,3 +381,27 @@ class DoublyLinkedList(object):
                 next_node = next_node.next
 
             current = current.next
+
+    def merge_two_linklist(self, list1: Node, list2: Node) -> Node:
+        merged_dll = DoublyLinkedList()
+
+        current_1 = list1
+        current_2 = list2
+
+        while current_1 and current_2:
+            if current_1.data < current_2.data:
+                merged_dll.append(current_1.data)
+                current_1 = current_1.next
+            else:
+                merged_dll.append(current_2.data)
+                current_2 = current_2.next
+
+        while current_1:
+            merged_dll.append(current_1.data)
+            current_1 = current_1.next
+
+        while current_2:
+            merged_dll.append(current_2.data)
+            current_2 = current_2.next
+
+        return merged_dll.head
