@@ -100,6 +100,25 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
+    def find_tilt(self):
+        total_tilt = 0
+
+        def _find_tilt(node: Node) -> int:
+            nonlocal total_tilt
+
+            if not node:
+                return 0
+
+            left = _find_tilt(node.left)
+            right = _find_tilt(node.right)
+            tilt = abs(left - right)
+            total_tilt += tilt
+
+            return left + right + node.value
+
+        _find_tilt(self.root)
+        return total_tilt
+
     def sum_of_left_leaves(self, root: Node) -> Optional[int]:
         if not root:
             return

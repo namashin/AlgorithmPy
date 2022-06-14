@@ -17,6 +17,12 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_find_tilt(self):
+        want = 49
+        got = self.bst.find_tilt()
+
+        self.assertEqual(want, got)
+
     def test_level_order(self):
         want = [[3], [1, 6], [5, 7], [10]]
         got = self.bst.level_order()
