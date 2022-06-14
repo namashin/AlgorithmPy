@@ -105,6 +105,7 @@ class BinarySearchTree(object):
         total_tilt = 0
 
         def _find_tilt(node: Node) -> int:
+            # nonlocal 文は、関数のひとつ外側の変数を参照します。
             nonlocal total_tilt
 
             if not node:
