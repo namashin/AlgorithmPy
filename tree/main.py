@@ -85,8 +85,6 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
-        self.total = 0
-
     def insert(self, value: int) -> None:
         def _insert(node: Node, _value: int) -> Node:
             if node is None:
@@ -119,17 +117,23 @@ class BinarySearchTree(object):
         _find_tilt(self.root)
         return total_tilt
 
-    def sum_of_left_leaves(self, root: Node) -> Optional[int]:
-        if not root:
-            return
+    def sum_of_left_leaves(self) -> Optional[int]:
+        total = 0
 
-        if root.left and (not root.left.left) and (not root.left.right):
-            self.total += root.left.value
+        def _sum_of_left_leaves(node: Node):
+            nonlocal total
 
-        self.sum_of_left_leaves(root.left)
-        self.sum_of_left_leaves(root.right)
+            if not node:
+                return
 
-        return self.total
+            if node.left and (not node.left.left) and (not node.left.right):
+                total += node.left.value
+
+            _sum_of_left_leaves(node.left)
+            _sum_of_left_leaves(node.right)
+
+        _sum_of_left_leaves(self.root)
+        return total
 
     def sum_of_left_leaves_stack(self) -> int:
         original_root = self.root

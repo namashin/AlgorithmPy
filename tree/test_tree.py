@@ -31,7 +31,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
     def test_sum_of_left_leaves(self):
         want = 6
-        got = self.bst.sum_of_left_leaves(self.bst.root)
+        got = self.bst.sum_of_left_leaves()
 
         self.assertEqual(want, got)
 
