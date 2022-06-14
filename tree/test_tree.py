@@ -29,6 +29,18 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertEqual(want, got)
 
+    def test_sum_of_all_nodes_value(self):
+        want = 32
+        got = self.bst.sum_of_all_nodes_value()
+
+        self.assertEqual(want, got)
+
+    def test_sum_of_right_leaves(self):
+        want = 10
+        got = self.bst.sum_of_right_leaves()
+
+        self.assertEqual(want, got)
+
     def test_sum_of_left_leaves(self):
         want = 6
         got = self.bst.sum_of_left_leaves()

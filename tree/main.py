@@ -98,7 +98,10 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
-    def find_tilt(self):
+    def find_tilt(self) -> int:
+        """
+        :return: 各ノードのチルドレンの絶対値の和
+        """
         total_tilt = 0
 
         def _find_tilt(node: Node) -> int:
@@ -116,6 +119,37 @@ class BinarySearchTree(object):
 
         _find_tilt(self.root)
         return total_tilt
+
+    def sum_of_all_nodes_value(self):
+        def _sum_of_all_nodes_value(node: Node) -> int:
+            if not node:
+                return 0
+
+            left = _sum_of_all_nodes_value(node.left)
+            right = _sum_of_all_nodes_value(node.right)
+
+            return left + right + node.value
+
+        return _sum_of_all_nodes_value(self.root)
+
+    def sum_of_right_leaves(self) -> Optional[int]:
+        total = 0
+
+        def _sum_of_right_leaves(node: Node) -> Optional[int]:
+            nonlocal total
+
+            if not node:
+                return
+
+            if node.right and (not node.right.right) and (not node.right.left):
+                total += node.right.value
+
+            _sum_of_right_leaves(node.left)
+            _sum_of_right_leaves(node.right)
+
+        _sum_of_right_leaves(self.root)
+
+        return total
 
     def sum_of_left_leaves(self) -> Optional[int]:
         total = 0
@@ -266,9 +300,6 @@ class BinarySearchTree(object):
         return _max_depth(self.root)
 
     def size_recursive(self) -> Optional[int]:
-        if self.root is None:
-            return
-
         def _size(node: Node) -> int:
             if node is None:
                 return 0
