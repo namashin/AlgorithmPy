@@ -25,7 +25,6 @@ class TestBinarySearchTree(unittest.TestCase):
 
     def test_get_minimum_abs_diff(self):
         numbers = self.bst.get_all_nodes_value()
-
         got = self.bst.minimum_abs_diff(numbers)
 
         self.assertEqual(1, got)  # 6と5の絶対値差の１
