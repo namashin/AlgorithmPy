@@ -99,16 +99,23 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
-    def get_all_nodes_value(self, node: Node) -> Optional[List[int]]:
-        if not node:
-            return
+    def get_all_nodes_value(self) -> List[int]:
+        all_nodes = []
 
-        self.all_nodes.append(node.value)
+        def _get_all_nodes_value(node: Node) -> Optional[List[int]]:
+            nonlocal all_nodes
 
-        self.get_all_nodes_value(node.left)
-        self.get_all_nodes_value(node.right)
+            if not node:
+                return
 
-        return self.all_nodes
+            all_nodes.append(node.value)
+
+            _get_all_nodes_value(node.left)
+            _get_all_nodes_value(node.right)
+
+        _get_all_nodes_value(self.root)
+
+        return all_nodes
 
     def minimum_abs_diff(self, numbers: List[int]) -> int:
         import sys
@@ -318,9 +325,12 @@ class BinarySearchTree(object):
         def _max_depth(root: Optional[Node]) -> int:
             if not root:
                 return 0
+
             left = _max_depth(root.left)
             right = _max_depth(root.right)
             return max(left, right) + 1
+            # return max(_max_depth(node.left), _max_depth(node.right)) + 1
+            # でもいい
 
         return _max_depth(self.root)
 

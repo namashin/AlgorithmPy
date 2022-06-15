@@ -19,12 +19,12 @@ class TestBinarySearchTree(unittest.TestCase):
 
     def test_get_all_nodes_value(self):
         want = [3, 6, 5, 7, 1, 10]
-        got = self.bst.get_all_nodes_value(self.bst.root)
+        got = self.bst.get_all_nodes_value()
 
         self.assertEqual(set(want), set(got))
 
     def test_get_minimum_abs_diff(self):
-        numbers = self.bst.get_all_nodes_value(self.bst.root)
+        numbers = self.bst.get_all_nodes_value()
 
         got = self.bst.minimum_abs_diff(numbers)
 
