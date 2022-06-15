@@ -1,6 +1,5 @@
 import collections
 from typing import Optional, List
-import heapq
 import sys
 from collections import deque
 
@@ -85,6 +84,8 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
+        self.all_nodes = []
+
     def insert(self, value: int) -> None:
         def _insert(node: Node, _value: int) -> Node:
             if node is None:
@@ -97,6 +98,29 @@ class BinarySearchTree(object):
             return node
 
         self.root = _insert(self.root, value)
+
+    def get_all_nodes_value(self, node: Node) -> Optional[List[int]]:
+        if not node:
+            return
+
+        self.all_nodes.append(node.value)
+
+        self.get_all_nodes_value(node.left)
+        self.get_all_nodes_value(node.right)
+
+        return self.all_nodes
+
+    def minimum_abs_diff(self, numbers: List[int]) -> int:
+        import sys
+        minimum_abs = sys.maxsize
+
+        len_numbers = len(numbers)
+        for i in range(len_numbers):
+            for j in range(i + 1, len_numbers):
+                abs_data = abs(numbers[i] - numbers[j])
+                minimum_abs = min(abs_data, minimum_abs)
+
+        return minimum_abs
 
     def find_tilt(self) -> int:
         """
@@ -424,6 +448,16 @@ class BinarySearchTree(object):
 
 
 class MiniHeap(object):
+    """
+    heap の実装
+
+    import heapq
+    a = [7, 5, 3, 2, 4, 8, 10, 1]
+    heapq.heapify(a)
+    heapq.heappush(a, 6)
+    heapq.heappop(a)
+    print(a)
+    """
     def __init__(self):
         self.heap = [-1 * sys.maxsize]
         self.current_size = 0
@@ -481,12 +515,3 @@ class MiniHeap(object):
         self.current_size -= 1
         self.heapify_down(1)
         return root
-
-
-if __name__ == '__main__':
-    # heap の実装
-    a = [7, 5, 3, 2, 4, 8, 10, 1]
-    heapq.heapify(a)
-    heapq.heappush(a, 6)
-    heapq.heappop(a)
-    print(a)

@@ -17,6 +17,19 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_get_all_nodes_value(self):
+        want = [3, 6, 5, 7, 1, 10]
+        got = self.bst.get_all_nodes_value(self.bst.root)
+
+        self.assertEqual(set(want), set(got))
+
+    def test_get_minimum_abs_diff(self):
+        numbers = self.bst.get_all_nodes_value(self.bst.root)
+
+        got = self.bst.minimum_abs_diff(numbers)
+
+        self.assertEqual(1, got)  # 6と5の絶対値差の１
+
     def test_find_tilt(self):
         want = 49
         got = self.bst.find_tilt()
