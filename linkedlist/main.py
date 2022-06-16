@@ -33,29 +33,36 @@ class LinkedList(object):
             last_node = last_node.next
         last_node.next = new_node
 
-    def merge_two_linklist(self, list1: Node, list2: Node) -> Node:
-        result = LinkedList()
+    def merge_two_linkedList(self, list1_head: Node, list2_head: Node) -> None:
+        """
+        paramに取る二つのリンクリストは正しく降順か
+        昇順にソートされている必要がある。
+        """
+        merged_linked_list = LinkedList()
 
-        current1 = list1
-        current2 = list2
+        self.sort(list1_head)
+        self.sort(list2_head)
+
+        current1 = list1_head
+        current2 = list2_head
 
         while current1 and current2:
             if current1.data < current2.data:
-                result.append(current1.data)
+                merged_linked_list.append(current1.data)
                 current1 = current1.next
             else:
-                result.append(current2.data)
+                merged_linked_list.append(current2.data)
                 current2 = current2.next
 
         while current1:
-            result.append(current1.data)
+            merged_linked_list.append(current1.data)
             current1 = current1.next
 
         while current2:
-            result.append(current2.data)
+            merged_linked_list.append(current2.data)
             current2 = current2.next
 
-        return result.head
+        self.head = merged_linked_list.head
 
     def insert(self, data: Any):
         new_node = Node(data)
@@ -137,8 +144,21 @@ class LinkedList(object):
 
         self.head = _reverse_recursive(self.head, None)
 
-    def sort(self):
+    def sort_myself(self):
         current = self.head
+        while current:
+            next_node = current.next
+            while next_node:
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
+
+            current = current.next
+
+    @staticmethod
+    def sort(node: Node):
+        current = node
+
         while current:
             next_node = current.next
             while next_node:
@@ -350,7 +370,7 @@ class DoublyLinkedList(object):
 
             current = current.next
 
-    def merge_two_linklist(self, list1: Node, list2: Node) -> Node:
+    def merge_two_linklist(self, list1: Node, list2: Node) -> None:
         merged_dll = DoublyLinkedList()
 
         current_1 = list1
@@ -372,4 +392,4 @@ class DoublyLinkedList(object):
             merged_dll.append(current_2.data)
             current_2 = current_2.next
 
-        return merged_dll.head
+        self.head = merged_dll.head

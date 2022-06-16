@@ -84,49 +84,66 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual("Test2", self.linked_list.head.next.data)
         self.assertEqual("Test1", self.linked_list.head.next.next.data)
 
-    def test_sort(self) -> None:
+    def test_sort_myself(self) -> None:
         self.linked_list.append(4)
         self.linked_list.append(2)
         self.linked_list.append(7)
         self.linked_list.append(5)
 
-        self.linked_list.sort()
+        self.linked_list.sort_myself()
 
         self.assertEqual(2, self.linked_list.head.data)
         self.assertEqual(4, self.linked_list.head.next.data)
         self.assertEqual(5, self.linked_list.head.next.next.data)
         self.assertEqual(7, self.linked_list.head.next.next.next.data)
 
-    def test_merge_two_linklist(self):
+    def test_sort(self):
+        # Init
+        new_linked_list = main.LinkedList()
+        new_linked_list.append(7)
+        new_linked_list.append(3)
+        new_linked_list.append(5)
+        new_linked_list.append(14)
+        new_linked_list.append(2)
+        new_linked_list.append(23)
+
+        # Execution
+        self.linked_list.sort(new_linked_list.head)
+
+        # Validation
+        self.assertEqual(2, new_linked_list.head.data)
+        self.assertEqual(3, new_linked_list.head.next.data)
+        self.assertEqual(5, new_linked_list.head.next.next.data)
+        self.assertEqual(7, new_linked_list.head.next.next.next.data)
+        self.assertEqual(14, new_linked_list.head.next.next.next.next.data)
+        self.assertEqual(23, new_linked_list.head.next.next.next.next.next.data)
+
+    def test_merge_two_linkedList(self):
         # Init
         linklist_1 = main.LinkedList()
-        linklist_1.append(2)
-        linklist_1.append(4)
+        linklist_1.append(7)
+        linklist_1.append(3)
         linklist_1.append(5)
-        linklist_1.append(9)
-        linklist_1.append(10)
+        linklist_1.append(14)
 
         linklist_2 = main.LinkedList()
-        linklist_2.append(1)
-        linklist_2.append(3)
-        linklist_2.append(4)
-        linklist_2.append(9)
+        linklist_2.append(32)
+        linklist_2.append(11)
+        linklist_2.append(5)
         linklist_2.append(12)
 
         # Execution
-        merged_node = self.linked_list.merge_two_linklist(linklist_1.head, linklist_2.head)
+        self.linked_list.merge_two_linkedList(linklist_1.head, linklist_2.head)
 
         # Validation
-        self.assertEqual(1, merged_node.data)
-        self.assertEqual(2, merged_node.next.data)
-        self.assertEqual(3, merged_node.next.next.data)
-        self.assertEqual(4, merged_node.next.next.next.data)
-        self.assertEqual(4, merged_node.next.next.next.next.data)
-        self.assertEqual(5, merged_node.next.next.next.next.next.data)
-        self.assertEqual(9, merged_node.next.next.next.next.next.next.data)
-        self.assertEqual(9, merged_node.next.next.next.next.next.next.next.data)
-        self.assertEqual(10, merged_node.next.next.next.next.next.next.next.next.data)
-        self.assertEqual(12, merged_node.next.next.next.next.next.next.next.next.next.data)
+        self.assertEqual(3, self.linked_list.head.data)
+        self.assertEqual(5, self.linked_list.head.next.data)
+        self.assertEqual(5, self.linked_list.head.next.next.data)
+        self.assertEqual(7, self.linked_list.head.next.next.next.data)
+        self.assertEqual(11, self.linked_list.head.next.next.next.next.data)
+        self.assertEqual(12, self.linked_list.head.next.next.next.next.next.data)
+        self.assertEqual(14, self.linked_list.head.next.next.next.next.next.next.data)
+        self.assertEqual(32, self.linked_list.head.next.next.next.next.next.next.next.data)
 
     def test_remove_nth_node_from_head(self):
         # Init
@@ -245,19 +262,19 @@ class TestDoublyLinkedList(unittest.TestCase):
         linklist_2.append(12)
 
         # Execution
-        merged_node = self.doubly_linked_list.merge_two_linklist(list1=linklist_1.head, list2=linklist_2.head)
+        self.doubly_linked_list.merge_two_linklist(list1=linklist_1.head, list2=linklist_2.head)
 
         # Validation
-        self.assertEqual(1, merged_node.data)
-        self.assertEqual(2, merged_node.next.data)
-        self.assertEqual(3, merged_node.next.next.data)
-        self.assertEqual(4, merged_node.next.next.next.data)
-        self.assertEqual(4, merged_node.next.next.next.next.data)
-        self.assertEqual(5, merged_node.next.next.next.next.next.data)
-        self.assertEqual(9, merged_node.next.next.next.next.next.next.data)
-        self.assertEqual(9, merged_node.next.next.next.next.next.next.next.data)
-        self.assertEqual(10, merged_node.next.next.next.next.next.next.next.next.data)
-        self.assertEqual(12, merged_node.next.next.next.next.next.next.next.next.next.data)
+        self.assertEqual(1, self.doubly_linked_list.head.data)
+        self.assertEqual(2, self.doubly_linked_list.head.next.data)
+        self.assertEqual(3, self.doubly_linked_list.head.next.next.data)
+        self.assertEqual(4, self.doubly_linked_list.head.next.next.next.data)
+        self.assertEqual(4, self.doubly_linked_list.head.next.next.next.next.data)
+        self.assertEqual(5, self.doubly_linked_list.head.next.next.next.next.next.data)
+        self.assertEqual(9, self.doubly_linked_list.head.next.next.next.next.next.next.data)
+        self.assertEqual(9, self.doubly_linked_list.head.next.next.next.next.next.next.next.data)
+        self.assertEqual(10, self.doubly_linked_list.head.next.next.next.next.next.next.next.next.data)
+        self.assertEqual(12, self.doubly_linked_list.head.next.next.next.next.next.next.next.next.next.data)
 
 
 if __name__ == '__main__':
