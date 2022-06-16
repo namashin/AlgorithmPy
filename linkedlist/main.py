@@ -8,6 +8,13 @@ from typing import Any, Optional
 #         self.data = data
 #         self.next = next_node
 
+# 双方向リンクリスト用のノードクラス
+class Node(object):
+    def __init__(self, data: Any, prev: Node = None, next_node: Node = None):
+        self.prev = prev
+        self.data = data
+        self.next = next_node
+
 
 class LinkedList(object):
 
@@ -57,25 +64,21 @@ class LinkedList(object):
         self.head = new_node
 
     def print(self):
-        all_nodes = self.head
+        current = self.head
 
-        while all_nodes:
-            print(all_nodes.data)
-            all_nodes = all_nodes.next
+        while current:
+            print(current.data)
+            current = current.next
 
     def remove_element(self, target: Any) -> None:
-        if self.head is None:
-            return
-
         current = self.head
+
         if current and current.data == target:
             if current.next is None:
                 self.head = None
-                current = None
                 return
             else:
                 self.head = current.next
-                current = None
                 return
 
         previous = None
@@ -83,46 +86,26 @@ class LinkedList(object):
             previous = current
             current = current.next
 
-        if current is None:
-            return
-
         if current.next is None:
             previous.next = None
-            current = None
-            return
         else:
             previous.next = current.next
-            current = None
-            return
 
-    def remove_elements(self, target):
-        """
-        片方向リンクリストの場合、class Node（ノード）に　prev　が無いので、
-        変数: previousが必要
-        """
-        if not self.head:
-            return
-
-        def _remove_elements(head: Node, _target: Any) -> Optional[Node]:
-            previous = None
-            current = head
-
-            while current:
-                if current.data == _target:
-                    if previous:
-                        previous.next = current.next
-                    else:
-                        head = current.next
-
-                    current = current.next
-
+    def remove_elements(self, target: Any) -> None:
+        current = self.head
+        previous = None
+        while current:
+            if current.data == target:
+                if previous:
+                    previous.next = current.next
                 else:
-                    previous = current
-                    current = current.next
+                    self.head = current.next
 
-            return head
+                current = current.next
 
-        self.head = _remove_elements(self.head, target)
+            else:
+                previous = current
+                current = current.next
 
     @staticmethod
     def get_next_node(node: Node) -> Any:
@@ -193,14 +176,6 @@ class LinkedList(object):
                 current = None
         else:
             self.head = current.next
-
-
-# 双方向リンクリスト用のノードクラス
-class Node(object):
-    def __init__(self, data: Any, prev: Node = None, next_node: Node = None):
-        self.prev = prev
-        self.data = data
-        self.next = next_node
 
 
 class DoublyLinkedList(object):
@@ -320,13 +295,6 @@ class DoublyLinkedList(object):
             current = None
 
     def remove_elements(self, target: Any) -> None:
-        """
-        全てのtarget値を削除
-
-        :param target: 削除する値
-        :return:
-        """
-
         current = self.head
         previous = None
 
@@ -344,8 +312,8 @@ class DoublyLinkedList(object):
                 previous = current
                 current = current.next
 
-    # 単方向リンクリストのリバース方法でも可
     def reverse_iterative(self):
+        """単方向リンクリストのリバース方法でも可"""
         previous_node = None
         current_node = self.head
 

@@ -37,15 +37,20 @@ class TestLinkedList(unittest.TestCase):
     def test_remove_elements(self):
         # Init
         self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
         self.linked_list.append("Test1")
         self.linked_list.append("Test4")
         self.linked_list.append("Test2")
+        self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
+        self.linked_list.append("Test4")
         self.linked_list.append("Test3")
         self.linked_list.append("Test4")
         self.linked_list.append("Test4")
         self.linked_list.append("Test4")
         self.linked_list.append("Test4")
-
         self.linked_list.append("Test5")
 
         # Execution
