@@ -2,13 +2,13 @@ from __future__ import annotations
 from typing import Any, Optional
 
 
-# 一方向リンクリスト用のノードクラス
+# 片方向リンクリスト用
 # class Node(object):
 #     def __init__(self, data: Any, next_node: Node = None):
 #         self.data = data
 #         self.next = next_node
 
-# 双方向リンクリスト用のノードクラス
+# 双方向リンクリスト用
 class Node(object):
     def __init__(self, data: Any, prev: Node = None, next_node: Node = None):
         self.prev = prev
