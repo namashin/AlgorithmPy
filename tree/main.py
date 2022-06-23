@@ -99,6 +99,17 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
+    def merge_two_binary_trees(self, root1: Node, root2: Node) -> Node:
+        if root1 and root2:
+            node = Node(root1.value + root2.value)
+
+            node.left = self.merge_two_binary_trees(root1.left, root2.left)
+            node.right = self.merge_two_binary_trees(root1.right, root2.right)
+            return node
+
+        else:
+            return root1 or root2
+
     def get_all_nodes_value(self) -> List[int]:
         all_nodes = []
 

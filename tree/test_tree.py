@@ -17,6 +17,28 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_merge_two_binary_trees(self):
+        bst1 = main.BinarySearchTree()
+        bst1.insert(6)
+        bst1.insert(2)
+        bst1.insert(7)
+        bst1.insert(5)
+
+        bst2 = main.BinarySearchTree()
+        bst2.insert(2)
+        bst2.insert(4)
+        bst2.insert(9)
+        bst2.insert(0)
+        bst2.insert(1)
+
+        root = self.bst.merge_two_binary_trees(bst1.root, bst2.root)
+
+        self.assertEqual(root.value, 8)
+        self.assertEqual(root.left.value, 2)
+        self.assertEqual(root.left.right.value, 6)
+        self.assertEqual(root.right.value, 11)
+        self.assertEqual(root.right.right.value, 9)
+
     def test_get_all_nodes_value(self):
         want = [3, 6, 5, 7, 1, 10]
         got = self.bst.get_all_nodes_value()

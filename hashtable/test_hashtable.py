@@ -26,7 +26,6 @@ class TestHashTable(unittest.TestCase):
 
         hash_num1 = self.hash_table.hash("key1")
 
-        self.assertIsInstance(self.hash_table.table[hash_num1][0], list)
         self.assertEqual(self.hash_table.table[hash_num1][0][1], "value3")
 
     def test_get(self):
