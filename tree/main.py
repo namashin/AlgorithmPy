@@ -99,6 +99,29 @@ class BinarySearchTree(object):
 
         self.root = _insert(self.root, value)
 
+    def find_two_sum_target(self, target_number: int) -> bool:
+        elements = []
+
+        def get_all_elements(node: Node) -> None:
+            nonlocal elements
+
+            if node is None:
+                return
+
+            elements.append(node.value)
+
+            get_all_elements(node.left)
+            get_all_elements(node.right)
+
+        get_all_elements(self.root)
+
+        for i, value1 in enumerate(elements):
+            for value2 in elements[i:]:
+                if (value1 + value2) == target_number:
+                    return True
+
+        return False
+
     def merge_two_binary_trees(self, root1: Node, root2: Node) -> Node:
         if root1 and root2:
             node = Node(root1.value + root2.value)

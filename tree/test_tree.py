@@ -17,6 +17,15 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_find_two_sum_target(self):
+        want1 = 8
+        is_there = self.bst.find_two_sum_target(want1)
+        self.assertTrue(is_there)
+
+        want2 = 22
+        is_there = self.bst.find_two_sum_target(want2)
+        self.assertFalse(is_there)
+
     def test_merge_two_binary_trees(self):
         bst1 = main.BinarySearchTree()
         bst1.insert(6)
