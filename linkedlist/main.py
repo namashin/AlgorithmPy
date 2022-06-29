@@ -28,10 +28,10 @@ class LinkedList(object):
             self.head = new_node
             return
 
-        last_node = self.head
-        while last_node.next:
-            last_node = last_node.next
-        last_node.next = new_node
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
 
     def merge_two_linkedList(self, list1_head: Node, list2_head: Node) -> None:
         """
@@ -97,6 +97,22 @@ class LinkedList(object):
             previous.next = None
         else:
             previous.next = current.next
+
+    def remove_element_ver2(self, target: Any) -> None:
+        current = self.head
+        previous = None
+
+        while current:
+            if current.data == target:
+                if previous:
+                    previous.next = current.next
+                else:
+                    self.head = current.next
+                return
+
+            else:
+                previous = current
+                current = current.next
 
     def remove_elements(self, target: Any) -> None:
         current = self.head
@@ -272,12 +288,7 @@ class DoublyLinkedList(object):
             self.head = current.next
 
     def remove_element(self, target: Any) -> None:
-        """
-        最初のtargetのみ削除
-
-        :param target: 削除する値
-        :return:
-        """
+        """最初のtargetのみ削除"""
         current = self.head
 
         if current and current.data == target:

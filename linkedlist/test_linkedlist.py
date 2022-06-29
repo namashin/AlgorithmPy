@@ -34,6 +34,25 @@ class TestLinkedList(unittest.TestCase):
         self.linked_list.remove_element("Test1")
         self.assertEqual("Test2", self.linked_list.head.data)
 
+    def test_remove_element_ver2(self):
+        # Init
+        self.linked_list.append(1)
+        self.linked_list.append(6)
+        self.linked_list.append(4)
+        self.linked_list.append(2)
+        self.linked_list.append(8)
+        self.linked_list.append(4)
+
+        # Execution
+        self.linked_list.remove_element_ver2(4)
+
+        # Validation
+        self.assertEqual(1, self.linked_list.head.data)
+        self.assertEqual(6, self.linked_list.head.next.data)
+        self.assertEqual(2, self.linked_list.head.next.next.data)
+        self.assertEqual(8, self.linked_list.head.next.next.next.data)
+        self.assertEqual(4, self.linked_list.head.next.next.next.next.data)
+
     def test_remove_elements(self):
         # Init
         self.linked_list.append("Test4")
