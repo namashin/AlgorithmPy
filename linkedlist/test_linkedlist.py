@@ -103,6 +103,28 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual("Test2", self.linked_list.head.next.data)
         self.assertEqual("Test1", self.linked_list.head.next.next.data)
 
+    def test_reverse_even(self):
+        # Init
+        self.linked_list.append(2)
+        self.linked_list.append(4)
+        self.linked_list.append(6)
+        self.linked_list.append(1)
+        self.linked_list.append(4)
+        self.linked_list.append(8)
+        self.linked_list.append(5)
+
+        # Execution
+        self.linked_list.reverse_even()
+
+        # Validation
+        self.assertEqual(6, self.linked_list.head.data)
+        self.assertEqual(4, self.linked_list.head.next.data)
+        self.assertEqual(2, self.linked_list.head.next.next.data)
+        self.assertEqual(1, self.linked_list.head.next.next.next.data)
+        self.assertEqual(8, self.linked_list.head.next.next.next.next.data)
+        self.assertEqual(4, self.linked_list.head.next.next.next.next.next.data)
+        self.assertEqual(5, self.linked_list.head.next.next.next.next.next.next.data)
+
     def test_sort_myself(self) -> None:
         self.linked_list.append(4)
         self.linked_list.append(2)

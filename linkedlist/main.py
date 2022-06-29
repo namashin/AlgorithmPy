@@ -160,6 +160,31 @@ class LinkedList(object):
 
         self.head = _reverse_recursive(self.head, None)
 
+    def reverse_even(self):
+        if self.head is None:
+            return
+
+        def _reverse_even(head: Node, previous: Optional[Node]) -> Optional[Node]:
+            if head is None:
+                return None
+
+            current = head
+            while current and current.data % 2 == 0:
+                next = current.next
+                current.next = previous
+                previous = current
+                current = next
+
+            if current != head:
+                head.next = current
+                _reverse_even(current, None)
+                return previous
+            else:
+                head.next = _reverse_even(head.next, head)
+                return head
+
+        self.head = _reverse_even(self.head, None)
+
     def sort_myself(self):
         current = self.head
         while current:
