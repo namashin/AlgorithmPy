@@ -1,4 +1,4 @@
-# AlgorithmPy
+# Algorithm in Python3
 
 
 ## Contents
