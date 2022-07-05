@@ -1,5 +1,6 @@
 import unittest
 import main
+import pytest
 
 
 class TestBinarySearchTree(unittest.TestCase):
@@ -16,6 +17,44 @@ class TestBinarySearchTree(unittest.TestCase):
 
     def tearDown(self) -> None:
         pass
+
+    def test_is_same_tree(self):
+        # Init
+        bst1 = main.BinarySearchTree()
+        bst1.insert(5)
+        bst1.insert(3)
+        bst1.insert(7)
+        bst1.insert(9)
+
+        bst2 = main.BinarySearchTree()
+        bst2.insert(5)
+        bst2.insert(3)
+        bst2.insert(7)
+        bst2.insert(9)
+
+        # Execution
+        got = self.bst.is_same_tree(bst1.root, bst2.root)
+        # Validation
+        self.assertTrue(got)
+
+    def test_is_same_tree_fail(self):
+        # Init
+        bst1 = main.BinarySearchTree()
+        bst1.insert(5)
+        bst1.insert(3)
+        bst1.insert(7)
+        bst1.insert(4)
+
+        bst2 = main.BinarySearchTree()
+        bst2.insert(5)
+        bst2.insert(3)
+        bst2.insert(7)
+        bst2.insert(9)
+
+        # Execution
+        got = self.bst.is_same_tree(bst1.root, bst2.root)
+        # Validation
+        self.assertFalse(got)
 
     def test_find_two_sum_target(self):
         want1 = 8
@@ -296,4 +335,4 @@ class TestMiniHeap(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()

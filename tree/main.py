@@ -490,6 +490,22 @@ class BinarySearchTree(object):
 
         return result
 
+    def is_same_tree(self, node_1: Node, node_2: Node) -> bool:
+        # 両方ともNoneのパターン
+        if (not node_1) and (not node_2):
+            return True
+
+        # 両方ともNoneではないが、片方がNoneのパターン
+        if (not node_1) or (not node_2):
+            return False
+
+        # 値違うパターン
+        if node_1.value != node_2.value:
+            return False
+
+        # 両方ともTrue返ってきたら、True. 一方がFalseあるとFalse.
+        return self.is_same_tree(node_1.right, node_2.right) and self.is_same_tree(node_1.left, node_2.left)
+
 
 class MiniHeap(object):
     """
