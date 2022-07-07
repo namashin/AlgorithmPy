@@ -18,6 +18,12 @@ class TestBinarySearchTree(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_sum_root_to_leaf(self):
+        got = self.bst.sum_root_to_leaf()
+        want = 31 + 365 + 36710
+
+        self.assertEqual(got, want)
+
     def test_is_same_tree(self):
         # Init
         bst1 = main.BinarySearchTree()

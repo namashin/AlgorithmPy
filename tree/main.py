@@ -506,6 +506,17 @@ class BinarySearchTree(object):
         # 両方ともTrue返ってきたら、True. 一方がFalseあるとFalse.
         return self.is_same_tree(node_1.right, node_2.right) and self.is_same_tree(node_1.left, node_2.left)
 
+    def sum_root_to_leaf(self) -> int:
+        sums = self.find_all_tree_paths()
+
+        total = 0
+        for path in sums:
+            path = [str(integer) for integer in path]
+            str_path = ''.join(path)
+            total += int(str_path)
+
+        return total
+
 
 class MiniHeap(object):
     """
