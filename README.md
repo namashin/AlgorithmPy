@@ -8,5 +8,3 @@ linkedList<br>
 hashtable<br>
 stack & queue<br>
 binary search three<br>
-<br>
-coding Interview
