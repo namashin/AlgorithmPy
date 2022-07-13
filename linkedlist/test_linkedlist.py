@@ -19,6 +19,26 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual("Test2", self.linked_list.head.next.data)
         self.assertEqual("Test3", self.linked_list.head.next.next.data)
 
+    def test_swap_pairs(self):
+        # Init
+        self.linked_list.append(4)
+        self.linked_list.append(6)
+        self.linked_list.append(1)
+        self.linked_list.append(8)
+        self.linked_list.append(5)
+        self.linked_list.append(9)
+
+        # Execution
+        self.linked_list.swap_pairs()
+
+        # Test
+        self.assertEqual(6, self.linked_list.head.data)
+        self.assertEqual(4, self.linked_list.head.next.data)
+        self.assertEqual(8, self.linked_list.head.next.next.data)
+        self.assertEqual(1, self.linked_list.head.next.next.next.data)
+        self.assertEqual(9, self.linked_list.head.next.next.next.next.data)
+        self.assertEqual(5, self.linked_list.head.next.next.next.next.next.data)
+
     def test_insert(self):
         self.linked_list.append("Test1")
         self.linked_list.append("Test2")

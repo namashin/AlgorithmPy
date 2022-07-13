@@ -33,6 +33,19 @@ class LinkedList(object):
             current = current.next
         current.next = new_node
 
+    def swap_pairs(self):
+        even_count = 1
+
+        current = self.head
+        previous = None
+        while current:
+            if even_count % 2 == 0:
+                previous.data, current.data = current.data, previous.data
+
+            even_count += 1
+            previous = current
+            current = current.next
+
     def merge_two_linkedList(self, list1_head: Node, list2_head: Node) -> None:
         """
         paramに取る二つのリンクリストは正しく降順か
