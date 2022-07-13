@@ -7,4 +7,4 @@ binary search<br>
 linkedList<br>
 hashtable<br>
 stack & queue<br>
-binary search three<br>
+binary search tree<br>
